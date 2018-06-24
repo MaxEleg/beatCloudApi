@@ -1,32 +1,38 @@
 module.exports = function publicApi(app) {
-  app.post('/account/register', async function (req, res) {
+  app.post('/account/register', async function(req, res) {
     try {
       var User = app.models.User;
-      console.log('>>>>', JSON.stringify(req.body));
-      User.email = req.body.mail;
-      res.json({msg: "Compte créé"});
+      var newUser = new User(req.body);
+      await newUser.save();
+
+      var login = await app.models.User.login({
+        username: req.body.username,
+        password: req.body.password,
+      }, 'user');
+      res.json({
+        user: await login.user.get()
+    });
     } catch (ex) {
-      console.error(ex);
-      res.status(400).json({msg: ex.message});
+      res.status(400).json(ex);
     }
   }
 
 )
   ;
   app.post('/account/login', async function(req, res) {
-    try{
+    try {
       var login = await app.models.User.login({
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
       }, 'user');
 
       res.json({
         status: 'OK',
         msg: 'Vous etes authentifié',
-        user:  await login.user.get(),
-        token: login.id
+        user: await login.user.get(),
+        token: login.id,
       });
-    } catch(ex){
+    } catch (ex) {
       console.log(ex);
       res.status(400).json(ex);
     }
