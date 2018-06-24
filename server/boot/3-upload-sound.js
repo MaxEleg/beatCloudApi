@@ -20,9 +20,6 @@ module.exports = function upload(app) {
   });
   var upload = multer({storage: storage});
 
-  app.use('/upload', function(req, next){
-    console.log(req.query.token);
-  });
   app.post('/upload', upload.array('files'), function(req, res) {
     res.send(req.files);
   });
