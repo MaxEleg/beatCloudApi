@@ -3,16 +3,6 @@
     "name": "db",
     "connector": "memory"
   },
-  "mlab": {
-    "host": "localhost",
-    "port": 27017,
-    "url": "mongodb://eorder:mkstudio123741@ds159024.mlab.com:59024/eorder",
-    "database": "eorder",
-    "password": "mkstudio123741",
-    "name": "mlab",
-    "user": "eorder",
-    "connector": "mongodb"
-  },
   "mongodb": {
     "host": "localhost",
     "port": 27017,

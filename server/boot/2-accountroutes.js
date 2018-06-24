@@ -1,34 +1,35 @@
-'use strict';
-
-var noteRoutes = require('../../src/lib/routes/public/note');
-
 module.exports = function publicApi(app) {
-  app.post('/account/register',async function(req, res) {
-    try{
+  app.post('/account/register', async function (req, res) {
+    try {
       var User = app.models.User;
-      await User.create(req.body);
+      console.log('>>>>', JSON.stringify(req.body));
+      User.email = req.body.mail;
       res.json({msg: "Compte créé"});
-    } catch(ex){
+    } catch (ex) {
       console.error(ex);
       res.status(400).json({msg: ex.message});
     }
-  });
+  }
 
-  app.post('/account/login', function(req, res) {
-    app.models.User.login({
-      'username': req.body.username,
-      'password': req.body.password,
-    }, 'user', function(err, result) {
-      if (err) {
-        res.status(400).json(err);
-        return;
-      }
+)
+  ;
+  app.post('/account/login', async function(req, res) {
+    try{
+      var login = await app.models.User.login({
+        username: req.body.username,
+        password: req.body.password
+      }, 'user');
+
       res.json({
         status: 'OK',
         msg: 'Vous etes authentifié',
-        'token': result.id,
+        user:  await login.user.get(),
+        token: login.id
       });
-    });
+    } catch(ex){
+      console.log(ex);
+      res.status(400).json(ex);
+    }
   });
 
   app.get('/account/logout', function(req, res) {
