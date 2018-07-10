@@ -5,4 +5,6 @@ module.exports = function publicApi(app) {
   User.defineProperty('lastName', {type: 'string', required: 'Merci de rentrer un nom'});
   User.defineProperty('phone', {type: 'string', required: false});
   User.defineProperty('birthDate', {type: 'date', required: false});
+  User.defineProperty('rank', {type: 'number', required: false, default: 0});
+  User.defineProperty('banned', {type: 'boolean', required: false, default: false});
 };

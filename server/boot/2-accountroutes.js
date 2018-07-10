@@ -9,9 +9,17 @@ module.exports = function publicApi(app) {
         username: req.body.username,
         password: req.body.password,
       }, 'user');
+
+      var user = await login.user.get();
+
+      if (user.banned) {
+        res.status(400).json({msg: "Vous etes banni, l'authentification a la plateforme est refusée"});
+        return;
+      }
+
       res.json({
-        user: await login.user.get()
-    });
+        user: user
+      });
     } catch (ex) {
       res.status(400).json(ex);
     }
