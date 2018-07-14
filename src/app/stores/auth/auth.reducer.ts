@@ -8,12 +8,12 @@ const defaultState: WebAuth = {
   firstName: '',
   lastName: '',
   phone: '',
-  mail: '',
+  email: '',
+  artistName: '',
   rank: 0,
   token: '',
   isAuth: false
 };
-
 
 export function AuthReducer(state: WebAuth = defaultState, action: Action) {
   switch (action.type ) {
@@ -22,7 +22,8 @@ export function AuthReducer(state: WebAuth = defaultState, action: Action) {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         phone: action.payload.phone,
-        mail: action.payload.mail,
+        email: action.payload.email,
+        artistName: action.payload.artistName,
         rank: action.payload.rank,
         token: action.payload.token,
         isAuth: true

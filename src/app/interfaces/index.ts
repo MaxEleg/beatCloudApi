@@ -8,8 +8,9 @@ export interface Meal {
 export interface WebAuth {
   firstName: string;
   lastName: string;
-  mail: string;
+  email: string;
   phone: string;
+  artistName: string;
   rank: number;
   token: string;
   isAuth: boolean;

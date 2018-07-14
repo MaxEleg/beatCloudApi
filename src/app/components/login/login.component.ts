@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.apiService.auth(form).subscribe((auth: WebAuth) => {
       this.store.dispatch(new AuthActions.LoginIn(auth));
     }, (err) => {
-      this.error = err.error.msg;
+      this.error = err.error.message;
     });
   }
 

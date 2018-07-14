@@ -37,14 +37,11 @@ export class RegisterComponent implements OnInit {
     }
     newUser.birthDate = new Date(form.birthYear, form.birthMonth - 1, form.birthDay).getTime();
 
-    this.apiService.createAccount(newUser).subscribe((result: WebAuth) => {
+    this.apiService.createAccount(newUser).subscribe((response: any) => {
+      var result : WebAuth = response;
       this.store.dispatch(new AuthActions.LoginIn(result));
     }, result => {
-      if (Array.isArray(result.error)) {
-        this.errors = result.error;
-      } else {
-        this.errors = [result.error];
-      }
+      alert(result.error.message);
     });
   }
 }

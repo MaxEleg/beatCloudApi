@@ -13,7 +13,7 @@ import * as AuthActions from '../../stores/auth/auth.actions';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class HomePageComponent implements OnInit {
   errors: any[] = [];
   auth: WebAuth;
 

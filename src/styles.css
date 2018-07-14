@@ -28,4 +28,5 @@ textarea:focus, input:focus{
   height:100%;
   padding-top: var(--sidebar-size);
   padding-left: var(--sidebar-size);
+  padding-bottom: 57px;
 }

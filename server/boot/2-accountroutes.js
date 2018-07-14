@@ -1,44 +1,68 @@
 module.exports = function publicApi(app) {
   app.post('/account/register', async function(req, res) {
-    try {
-      var User = app.models.User;
-      var newUser = new User(req.body);
-      await newUser.save();
+      try {
+        var data = req.body;
 
+        if (data.password !== data.confirmPassword) {
+          res.status(400).json({error: {msg: 'Mot de passe de confirmation inccorect'}});
+          return;
+        }
+
+        var User = app.models.User;
+        var newUser = new User(req.body);
+        await newUser.save();
+
+        var login = await app.models.User.login({
+          username: req.body.username,
+          password: req.body.password,
+        }, 'user');
+
+        var user = await login.user.get();
+
+        if (user.banned) {
+          res.status(400).json({msg: "Vous etes banni, l'authentification à la plateforme est refusée"});
+          return;
+        }
+
+        res.json({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          phone: user.phone,
+          artistName: user.artistName,
+          rank: user.rank,
+          token: login.id,
+          isAuth: true,
+        });
+      } catch (ex) {
+        res.status(400).json(ex);
+      }
+    }
+
+  )
+  ;
+  app.post('/account/auth', async function(req, res) {
+    try {
       var login = await app.models.User.login({
         username: req.body.username,
         password: req.body.password,
       }, 'user');
 
       var user = await login.user.get();
-
       if (user.banned) {
-        res.status(400).json({msg: "Vous etes banni, l'authentification a la plateforme est refusée"});
+        res.status(400).json({msg: "Vous etes banni, l'authentification à la plateforme est refusée"});
         return;
       }
 
       res.json({
-        user: user
-      });
-    } catch (ex) {
-      res.status(400).json(ex);
-    }
-  }
-
-)
-  ;
-  app.post('/account/login', async function(req, res) {
-    try {
-      var login = await app.models.User.login({
-        username: req.body.username,
-        password: req.body.password,
-      }, 'user');
-
-      res.json({
-        status: 'OK',
-        msg: 'Vous etes authentifié',
-        user: await login.user.get(),
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        artistName: user.artistName,
+        rank: user.rank,
         token: login.id,
+        isAuth: true,
       });
     } catch (ex) {
       console.log(ex);
