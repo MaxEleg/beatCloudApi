@@ -20,7 +20,11 @@ module.exports = function upload(app) {
   });
   var upload = multer({storage: storage});
 
-  app.post('/upload', upload.array('files'), function(req, res) {
+  app.post('/upload', upload.single('file'), function(req, res) {
+    res.send(req.file);
+  });
+
+  app.post('/uploads', upload.array('files'), function(req, res) {
     res.send(req.files);
   });
 };
