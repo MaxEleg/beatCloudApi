@@ -3,6 +3,8 @@
 var multer = require('multer');
 var loggedMiddleWare = require('../../controllers/middlewares/logged');
 const crypto = require('crypto');
+var fileSystem = require('fs');
+var path = require('path');
 
 function _isWaveFile(file) {
   var names = file.split('.');
@@ -14,7 +16,7 @@ function _hash(str) {
   return hash.digest('hex');
 }
 function _getUid(req, file) {
-  return 'sound-' + req.user.id + '-' + Date.now() + '-' + _hash(file.originalname)
+  return 'sound-' + req.user.id + '-' + Date.now() + '-' + _hash(file.originalname);
 }
 module.exports = function upload(app) {
   app.post('/sound/upload', loggedMiddleWare(app));
@@ -62,8 +64,14 @@ module.exports = function upload(app) {
       var sounds = await app.models.Sound.find({
         where: {type: 'sound', userId: req.user.id}
       });
+
+      var user = await app.models.User.findById(req.user.id);
+
+      sounds.map(sound=>sound.artistName = user.artistName);
+
       res.json(sounds);
     } catch (ex) {
+      console.log(ex);
       res.json(ex);
     }
   });
@@ -76,5 +84,35 @@ module.exports = function upload(app) {
     res.json({
       sound: await sound.save()
     });
+  });
+
+  app.get('/sound/load/:uid', async function(req, res) {
+    try {
+      var sound = await app.models.Sound.findOne({
+        where: {
+          uid: req.params.uid
+        }
+      });
+
+      if (!sound) {
+        res.status(400).json({msg: "Merci de verifier l'uid"});
+        return;
+      }
+
+      var filePath = path.join(__dirname, '../../uploads/sound/' + sound.id);
+      var stat = fileSystem.statSync(filePath);
+
+      res.writeHead(200, {
+        'Content-Type': 'audio/x-wav',
+        'Content-Length': stat.size
+      });
+
+      var readStream = fileSystem.createReadStream(filePath);
+      // We replaced all the event handlers with a simple call to readStream.pipe()
+      readStream.pipe(res);
+    } catch (ex) {
+      console.log(ex);
+      res.status(400).json({msg: 'Une erreur est survenue.'});
+    }
   });
 };

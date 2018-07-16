@@ -31,6 +31,10 @@ textarea:focus, input:focus{
   padding-bottom: 57px;
 }
 
+wave {
+  height: 89px !important;
+}
+
 /************** UPLOADER ******************/
 .uploader-container{
   position: relative;

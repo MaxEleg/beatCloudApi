@@ -1,4 +1,14 @@
-
-<div class="waveform-container">
-  <div id="waveform"></div>
+<div class="player-container">
+  <div class="player-image"></div>
+  <div class="player-btn" (click)="playPause()">
+    <i *ngIf="!isPlaying" class="far fa-play-circle"></i>
+    <i *ngIf="isPlaying"  class="fas fa-pause-circle"></i>
+  </div>
+  <div class="sound-info">
+    <div class="sound-artist">{{sound.artistName}}</div>
+    <div class="sound-name">{{sound.name}}</div>
+  </div>
+  <div class="waveform-container">
+    <div attr.id="{{playerId}}"></div>
+  </div>
 </div>

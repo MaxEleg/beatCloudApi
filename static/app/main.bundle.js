@@ -675,14 +675,14 @@ var TopSideBarComponent = /** @class */ (function () {
 /***/ "./src/app/components/soundplayer/soundplayer.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".player-container{\n  position: relative;\n  margin-bottom: 12px;\n  height: 220px;\n  width: 100%;\n  overflow-x: hidden;\n}\n\n.player-image{\n  position: absolute;\n  height: 128px;\n  width: 128px;\n  top: 44px;\n  left: 26px;\n  background-image: url(http://localhost:3000/icons/wave.svg);\n  background-size: 100% auto;\n}\n\n.waveform-container{\n  width: 460px;\n  position: absolute;\n  left: 220px;\n  bottom: 26px;\n}\n\n.player-btn{\n  position: absolute;\n  top: 27px;\n  color: #ffffff;\n  left: 193px;\n  font-size: 48px;\n}\n\n.sound-info{\n  position: absolute;\n  top: 34px;\n  color: #D3D3D3;\n  left: 250px;\n}\n\n.sound-artist{\n  color: #999;\n}\n\n.sound-name{\n  color: #333;\n}\n"
 
 /***/ }),
 
 /***/ "./src/app/components/soundplayer/soundplayer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"waveform\"></div>\n"
+module.exports = "<div class=\"player-container\">\n  <div class=\"player-image\"></div>\n  <div class=\"player-btn\" (click)=\"playPause()\">\n    <i *ngIf=\"!isPlaying\" class=\"far fa-play-circle\"></i>\n    <i *ngIf=\"isPlaying\"  class=\"fas fa-pause-circle\"></i>\n  </div>\n  <div class=\"sound-info\">\n    <div class=\"sound-artist\">{{sound.artistName}}</div>\n    <div class=\"sound-name\">{{sound.name}}</div>\n  </div>\n  <div class=\"waveform-container\">\n    <div attr.id=\"{{playerId}}\"></div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -694,6 +694,7 @@ module.exports = "<div id=\"waveform\"></div>\n"
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__("./node_modules/@ngrx/store/@ngrx/store.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_api_service__ = __webpack_require__("./src/app/services/api/api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__("./src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -707,30 +708,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SoundPlayerComponent = /** @class */ (function () {
     function SoundPlayerComponent(apiService, store) {
         this.apiService = apiService;
         this.store = store;
-        this.errors = [];
+        this.playerId = "";
         this.wavesurfer = {};
+        this.isPlaying = false;
+        this.playerLoaded = false;
     }
     SoundPlayerComponent.prototype.ngOnInit = function () {
-        this.wavesurfer = WaveSurfer.create({
-            container: '#waveform'
-        });
-        this.wavesurfer.load(this.soundUrl);
-        this.wavesurfer.on('ready', function () {
-            this.wavesurfer.play();
-        });
+        var _this = this;
+        var playerId = 'player-' + this.sound.id;
+        var soundUrl = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].app_url + '/sound/load/' + this.sound.uid;
+        this.playerId = playerId;
+        setTimeout(function () {
+            var ctx = document.createElement('canvas').getContext('2d');
+            var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
+            linGrad.addColorStop(0.5, 'rgba(255, 255, 255, 1.000)');
+            linGrad.addColorStop(0.5, 'rgba(183, 183, 183, 1.000)');
+            _this.wavesurfer = WaveSurfer.create({
+                container: '#' + playerId,
+                // The color can be either a simple CSS color or a Canvas gradient
+                waveColor: linGrad,
+                progressColor: 'hsla(200, 100%, 30%, 0.5)',
+                cursorColor: '#fff',
+                // This parameter makes the waveform look like SoundCloud's player
+                barWidth: 3
+            });
+            _this.wavesurfer.load(soundUrl);
+            _this.wavesurfer.on('ready', function () {
+                _this.playerLoaded = true;
+                //this.wavesurfer.play();
+            });
+        }, 1000);
+    };
+    SoundPlayerComponent.prototype.playPause = function () {
+        this.wavesurfer.playPause();
+        this.isPlaying = !this.isPlaying;
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
         __metadata("design:type", Object)
-    ], SoundPlayerComponent.prototype, "playerId", void 0);
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
-        __metadata("design:type", Object)
-    ], SoundPlayerComponent.prototype, "soundUrl", void 0);
+    ], SoundPlayerComponent.prototype, "sound", void 0);
     SoundPlayerComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-soundplayer',
@@ -756,7 +777,7 @@ module.exports = ""
 /***/ "./src/app/components/sounds/sounds.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let sound of sounds\">\n  <app-soundplayer [playerId]=\"'player-' + sound.id\" [soundUrl]=\"'http://localhost/beatcloud/sound.wav'\"></app-soundplayer>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-12 col-md-12\" *ngFor=\"let sound of sounds\">\n    <app-soundplayer [sound]=\"sound\"></app-soundplayer>\n  </div>\n</div>\n"
 
 /***/ }),
 

@@ -1,4 +1,48 @@
+.player-container{
+  position: relative;
+  margin-bottom: 12px;
+  height: 220px;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #ffffff;
+}
+
+.player-image{
+  position: absolute;
+  height: 128px;
+  width: 128px;
+  top: 44px;
+  left: 26px;
+  background-image: url(http://localhost:3000/icons/wave.svg);
+  background-size: 100% auto;
+}
+
 .waveform-container{
   width: 460px;
-  padding-bottom: 120px;
+  position: absolute;
+  left: 220px;
+  bottom: 26px;
+}
+
+.player-btn{
+  position: absolute;
+  top: 27px;
+  color: #001f3f;
+  left: 193px;
+  font-size: 48px;
+}
+
+.sound-info{
+  position: absolute;
+  top: 34px;
+  color: #D3D3D3;
+  left: 250px;
+}
+
+.sound-artist{
+  color: #999;
+}
+
+.sound-name{
+  color: #333;
 }
