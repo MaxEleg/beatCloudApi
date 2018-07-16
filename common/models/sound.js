@@ -1,5 +1,5 @@
 'use strict';
 
-module.exports = function(Note) {
+module.exports = function(Sound) {
 
 };

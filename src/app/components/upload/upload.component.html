@@ -1,22 +1,20 @@
 <div *ngIf="auth.isAuth" class="row">
+
+  <div class="col col-xs-12 col-sm-12 col-md-12">
     <file-drop
-      headertext="Drop files here"
-      (onFileDrop)="dropped($event)"
-      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-      <span>optional content (don't set headertext then)</span>
+      headertext="Drop files here" (onFileDrop)="dropped($event)"
+      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)"
+      headertext=" "
+      customstyle="uploader-container">
+
     </file-drop>
-    <div class="upload-table">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Name</th>
-        </tr>
-        </thead>
-        <tbody class="upload-name-style">
-        <tr *ngFor="let item of files; let i=index">
-          <td><strong>{{ item.relativePath }}</strong></td>
-        </tr>
-        </tbody>
-      </table>
+    <p *ngIf="filesResults.length < 1" class="roboto-bold">Déposer des instruments</p>
+
+    <div class="files-container">
+      <div *ngFor="let file of filesResults" class="file-container">
+        {{file.name}}
+      </div>
     </div>
+  </div>
+
 </div>

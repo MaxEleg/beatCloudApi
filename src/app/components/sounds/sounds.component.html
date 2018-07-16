@@ -1,0 +1,3 @@
+<div *ngFor="let sound of sounds">
+  <app-soundplayer [playerId]="'player-' + sound.id" [soundUrl]="'http://localhost:3000/sound.wav'"></app-soundplayer>
+</div>

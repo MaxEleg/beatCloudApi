@@ -6,6 +6,7 @@ import {ApiService} from '../../services/api/api.service';
 import {User, AppState, WebAuth} from '../../interfaces';
 
 import * as AuthActions from '../../stores/auth/auth.actions';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   errors: any[] = [];
   auth: WebAuth;
 
-  constructor(private apiService: ApiService,  private store: Store<AppState>) {}
+  constructor(private apiService: ApiService,  private store: Store<AppState>,private router: Router ) {}
 
   ngOnInit() {
     this.store.select((state: AppState ) => {
@@ -40,6 +41,7 @@ export class RegisterComponent implements OnInit {
     this.apiService.createAccount(newUser).subscribe((response: any) => {
       var result : WebAuth = response;
       this.store.dispatch(new AuthActions.LoginIn(result));
+      this.router.navigateByUrl('/home');
     }, result => {
       alert(result.error.message);
     });

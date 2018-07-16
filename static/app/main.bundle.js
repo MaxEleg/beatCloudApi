@@ -29,12 +29,14 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_homepage_homepage_component__ = __webpack_require__("./src/app/components/homepage/homepage.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_edit_edit_component__ = __webpack_require__("./src/app/components/edit/edit.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_upload_upload_component__ = __webpack_require__("./src/app/components/upload/upload.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_sounds_sounds_component__ = __webpack_require__("./src/app/components/sounds/sounds.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -49,14 +51,15 @@ var routes = [
     { path: 'edit', component: __WEBPACK_IMPORTED_MODULE_5__components_edit_edit_component__["a" /* EditComponent */] },
     { path: 'home', component: __WEBPACK_IMPORTED_MODULE_4__components_homepage_homepage_component__["a" /* HomePageComponent */] },
     { path: 'upload', component: __WEBPACK_IMPORTED_MODULE_6__components_upload_upload_component__["a" /* UploadComponent */] },
+    { path: 'sounds', component: __WEBPACK_IMPORTED_MODULE_7__components_sounds_sounds_component__["a" /* SoundsComponent */] },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */].forRoot(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* RouterModule */]]
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */].forRoot(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* RouterModule */]]
         })
     ], AppRoutingModule);
     return AppRoutingModule;
@@ -87,13 +90,17 @@ var AppRoutingModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_sidebar_left_left_component__ = __webpack_require__("./src/app/components/sidebar/left/left.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_sidebar_top_top_component__ = __webpack_require__("./src/app/components/sidebar/top/top.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_upload_upload_component__ = __webpack_require__("./src/app/components/upload/upload.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_api_api_service__ = __webpack_require__("./src/app/services/api/api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_sounds_sounds_component__ = __webpack_require__("./src/app/components/sounds/sounds.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_soundplayer_soundplayer_component__ = __webpack_require__("./src/app/components/soundplayer/soundplayer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_api_api_service__ = __webpack_require__("./src/app/services/api/api.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -125,6 +132,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_12__components_register_register_component__["a" /* RegisterComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__components_edit_edit_component__["a" /* EditComponent */],
                 __WEBPACK_IMPORTED_MODULE_15__components_upload_upload_component__["a" /* UploadComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__components_sounds_sounds_component__["a" /* SoundsComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__components_soundplayer_soundplayer_component__["a" /* SoundPlayerComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -137,7 +146,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_5_ngx_file_drop__["a" /* FileDropModule */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_16__services_api_api_service__["a" /* ApiService */],
+                __WEBPACK_IMPORTED_MODULE_18__services_api_api_service__["a" /* ApiService */],
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_8__components_root_root_component__["a" /* RootComponent */]]
         })
@@ -397,6 +406,7 @@ module.exports = "<div *ngIf=\"!auth.isAuth\" class=\"row\">\n  <div class=\"col
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__("./node_modules/@ngrx/store/@ngrx/store.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_api_service__ = __webpack_require__("./src/app/services/api/api.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stores_auth_auth_actions__ = __webpack_require__("./src/app/stores/auth/auth.actions.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -410,10 +420,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent(apiService, store) {
+    function RegisterComponent(apiService, store, router) {
         this.apiService = apiService;
         this.store = store;
+        this.router = router;
         this.errors = [];
     }
     RegisterComponent.prototype.ngOnInit = function () {
@@ -436,6 +448,7 @@ var RegisterComponent = /** @class */ (function () {
         this.apiService.createAccount(newUser).subscribe(function (response) {
             var result = response;
             _this.store.dispatch(new __WEBPACK_IMPORTED_MODULE_3__stores_auth_auth_actions__["d" /* LoginIn */](result));
+            _this.router.navigateByUrl('/home');
         }, function (result) {
             alert(result.error.message);
         });
@@ -446,7 +459,7 @@ var RegisterComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/components/register/register.component.html"),
             styles: [__webpack_require__("./src/app/components/register/register.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_api_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["a" /* Store */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_api_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["a" /* Store */], __WEBPACK_IMPORTED_MODULE_4__angular_router__["a" /* Router */]])
     ], RegisterComponent);
     return RegisterComponent;
 }());
@@ -523,7 +536,7 @@ module.exports = ".left-sidebar{\n  height: 100%;\n  width: var(--sidebar-size);
 /***/ "./src/app/components/sidebar/left/left.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"left-sidebar\">\n\n  <div class=\"button-container\">\n    <div routerLink=\"/\" class=\"left-button main-button\">\n      <i class=\"fab fa-soundcloud\"></i>\n    </div>\n  </div>\n\n\n  <div *ngIf=\"!auth.isAuth\" class=\"button-container\">\n    <div class=\"left-button\" data-target=\"#modalLogin\" data-toggle=\"modal\" data-target=\"#modalLogin\">\n      <i class=\"fas fa-sign-in-alt\"></i>\n    </div>\n    <div routerLink=\"/register\" class=\"left-button\">\n      <i class=\"fas fa-user-plus\"></i>\n    </div>\n  </div>\n\n  <div *ngIf=\"auth.isAuth\" class=\"button-container\">\n    <div class=\"left-button\">\n      <i class=\"fas fa-users-cog\"></i>\n    </div>\n\n    <div  routerLink=\"/upload\" class=\"left-button\">\n      <i class=\"fas fa-file-upload\"></i>\n    </div>\n\n    <div class=\"left-button\">\n      <i class=\"fas fa-music\"></i>\n    </div>\n\n    <div *ngIf=\"auth.rank >= 7\" class=\"button-container\">\n      <div class=\"left-button\">\n        <i class=\"fas fa-tachometer-alt\"></i>\n      </div>\n    </div>\n\n    <div (click)=\"logout()\" class=\"left-button\" id=\"logout-left-button\">\n      <div style=\"text-align:center \">\n        <i class=\"fas fa-power-off\"></i>\n      </div>\n    </div>\n  </div>\n\n</div>\n\n<div style=\"z-index: 99999;\" class=\"modal fade\" id=\"modalLogin\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modalLoginLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"modalLoginLabel\">S'authentifier</h5>\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <div class=\"col md-3\">\n          <form #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm.value)\"  class=\"form-signin\">\n            <span style=\"color: red;\" *ngIf=\"error.length\">\n              {{ error }}\n            </span>\n            <label for=\"username\" class=\"sr-only\">Addresse email/ nom de compte</label>\n            <input type=\"text\" name=\"username\" id=\"username\" class=\"form-control\" placeholder=\"Nom de compte\" required autofocus ngModel>\n            <label for=\"inputPassword\" class=\"sr-only\">Mot de passe</label>\n            <input type=\"password\" id=\"inputPassword\" name=\"password\" class=\"form-control\" placeholder=\"Mot de passe\" required ngModel>\n            <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Se connecter</button>\n          </form>\n        </div>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Fermer</button>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"left-sidebar\">\n\n  <div class=\"button-container\">\n    <div routerLink=\"/\" class=\"left-button main-button\">\n      <i class=\"fab fa-soundcloud\"></i>\n    </div>\n  </div>\n\n\n  <div *ngIf=\"!auth.isAuth\" class=\"button-container\">\n    <div class=\"left-button\" data-target=\"#modalLogin\" data-toggle=\"modal\" data-target=\"#modalLogin\">\n      <i class=\"fas fa-sign-in-alt\"></i>\n    </div>\n    <div routerLink=\"/register\" class=\"left-button\">\n      <i class=\"fas fa-user-plus\"></i>\n    </div>\n  </div>\n\n  <div *ngIf=\"auth.isAuth\" class=\"button-container\">\n    <div class=\"left-button\">\n      <i class=\"fas fa-users-cog\"></i>\n    </div>\n\n    <div  routerLink=\"/upload\" class=\"left-button\">\n      <i class=\"fas fa-file-upload\"></i>\n    </div>\n\n    <div routerLink=\"/sounds\" class=\"left-button\">\n      <i class=\"fas fa-music\"></i>\n    </div>\n\n    <div *ngIf=\"auth.rank >= 7\" class=\"button-container\">\n      <div class=\"left-button\">\n        <i class=\"fas fa-tachometer-alt\"></i>\n      </div>\n    </div>\n\n    <div (click)=\"logout()\" class=\"left-button\" id=\"logout-left-button\">\n      <div style=\"text-align:center \">\n        <i class=\"fas fa-power-off\"></i>\n      </div>\n    </div>\n  </div>\n\n</div>\n\n<div style=\"z-index: 99999;\" class=\"modal fade\" id=\"modalLogin\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"modalLoginLabel\" aria-hidden=\"true\">\n  <div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\" id=\"modalLoginLabel\">S'authentifier</h5>\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <div class=\"col md-3\">\n          <form #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit(registerForm.value)\"  class=\"form-signin\">\n            <span style=\"color: red;\" *ngIf=\"error.length\">\n              {{ error }}\n            </span>\n            <label for=\"username\" class=\"sr-only\">Addresse email/ nom de compte</label>\n            <input type=\"text\" name=\"username\" id=\"username\" class=\"form-control\" placeholder=\"Nom de compte\" required autofocus ngModel>\n            <label for=\"inputPassword\" class=\"sr-only\">Mot de passe</label>\n            <input type=\"password\" id=\"inputPassword\" name=\"password\" class=\"form-control\" placeholder=\"Mot de passe\" required ngModel>\n            <button class=\"btn btn-lg btn-primary btn-block\" type=\"submit\">Se connecter</button>\n          </form>\n        </div>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Fermer</button>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -534,8 +547,9 @@ module.exports = "<div class=\"left-sidebar\">\n\n  <div class=\"button-containe
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LeftSideBarComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__("./node_modules/@ngrx/store/@ngrx/store.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_api_service__ = __webpack_require__("./src/app/services/api/api.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__stores_auth_auth_actions__ = __webpack_require__("./src/app/stores/auth/auth.actions.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_api_api_service__ = __webpack_require__("./src/app/services/api/api.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__stores_auth_auth_actions__ = __webpack_require__("./src/app/stores/auth/auth.actions.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -549,10 +563,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var LeftSideBarComponent = /** @class */ (function () {
-    function LeftSideBarComponent(store, apiService) {
+    function LeftSideBarComponent(store, apiService, router) {
         this.store = store;
         this.apiService = apiService;
+        this.router = router;
         this.error = '';
     }
     LeftSideBarComponent.prototype.ngOnInit = function () {
@@ -567,14 +583,19 @@ var LeftSideBarComponent = /** @class */ (function () {
         var _this = this;
         this.apiService.auth(form).subscribe(function (auth) {
             $('#modalLogin').modal('hide');
-            _this.store.dispatch(new __WEBPACK_IMPORTED_MODULE_3__stores_auth_auth_actions__["d" /* LoginIn */](auth));
+            _this.store.dispatch(new __WEBPACK_IMPORTED_MODULE_4__stores_auth_auth_actions__["d" /* LoginIn */](auth));
+            _this.router.navigateByUrl('/home');
         }, function (err) {
             alert("L'authentification a échoué, merci de réessayer.");
             console.log(err);
         });
     };
     LeftSideBarComponent.prototype.logout = function () {
-        this.store.dispatch(new __WEBPACK_IMPORTED_MODULE_3__stores_auth_auth_actions__["c" /* LogOut */]());
+        this.apiService.logout(this.auth.token).subscribe(function () { }, function (err) {
+            console.log(err);
+        });
+        this.store.dispatch(new __WEBPACK_IMPORTED_MODULE_4__stores_auth_auth_actions__["c" /* LogOut */]());
+        this.router.navigateByUrl('/home');
     };
     LeftSideBarComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -582,7 +603,7 @@ var LeftSideBarComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/components/sidebar/left/left.component.html"),
             styles: [__webpack_require__("./src/app/components/sidebar/left/left.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ngrx_store__["a" /* Store */], __WEBPACK_IMPORTED_MODULE_2__services_api_api_service__["a" /* ApiService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ngrx_store__["a" /* Store */], __WEBPACK_IMPORTED_MODULE_3__services_api_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* Router */]])
     ], LeftSideBarComponent);
     return LeftSideBarComponent;
 }());
@@ -651,17 +672,159 @@ var TopSideBarComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/components/soundplayer/soundplayer.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/soundplayer/soundplayer.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"waveform\"></div>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/soundplayer/soundplayer.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SoundPlayerComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__("./node_modules/@ngrx/store/@ngrx/store.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_api_service__ = __webpack_require__("./src/app/services/api/api.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var SoundPlayerComponent = /** @class */ (function () {
+    function SoundPlayerComponent(apiService, store) {
+        this.apiService = apiService;
+        this.store = store;
+        this.errors = [];
+        this.wavesurfer = {};
+    }
+    SoundPlayerComponent.prototype.ngOnInit = function () {
+        this.wavesurfer = WaveSurfer.create({
+            container: '#waveform'
+        });
+        this.wavesurfer.load(this.soundUrl);
+        this.wavesurfer.on('ready', function () {
+            this.wavesurfer.play();
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], SoundPlayerComponent.prototype, "playerId", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], SoundPlayerComponent.prototype, "soundUrl", void 0);
+    SoundPlayerComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-soundplayer',
+            template: __webpack_require__("./src/app/components/soundplayer/soundplayer.component.html"),
+            styles: [__webpack_require__("./src/app/components/soundplayer/soundplayer.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_api_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["a" /* Store */]])
+    ], SoundPlayerComponent);
+    return SoundPlayerComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/sounds/sounds.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/sounds/sounds.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngFor=\"let sound of sounds\">\n  <app-soundplayer [playerId]=\"'player-' + sound.id\" [soundUrl]=\"'http://localhost/beatcloud/sound.wav'\"></app-soundplayer>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/sounds/sounds.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SoundsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ngrx_store__ = __webpack_require__("./node_modules/@ngrx/store/@ngrx/store.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_api_api_service__ = __webpack_require__("./src/app/services/api/api.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var SoundsComponent = /** @class */ (function () {
+    function SoundsComponent(apiService, store) {
+        this.apiService = apiService;
+        this.store = store;
+    }
+    SoundsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.store.select(function (state) {
+            return state.auth;
+        }).subscribe(function (auth) {
+            _this.auth = auth;
+            _this.apiService.getUserSound(auth.token).subscribe(function (results) {
+                console.log(results);
+                _this.sounds = results;
+            }, function (err) {
+                alert(err.error.error.message || err.msg);
+            });
+        });
+    };
+    SoundsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-sounds',
+            template: __webpack_require__("./src/app/components/sounds/sounds.component.html"),
+            styles: [__webpack_require__("./src/app/components/sounds/sounds.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__services_api_api_service__["a" /* ApiService */], __WEBPACK_IMPORTED_MODULE_1__ngrx_store__["a" /* Store */]])
+    ], SoundsComponent);
+    return SoundsComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/upload/upload.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".errors-container{\r\n  padding-bottom: 8px;\r\n}\r\n\r\n.error {\r\n  color: red;\r\n}\r\n\r\n.already-auth{\r\n  padding-top: 30px;\r\n}\r\n"
+module.exports = ".files-container{\n  width: 100%;\n}\n\n.file-container{\n  width: 120px;\n  height: 184px;\n  border: 2px solid #484848;\n  display: inline-block;\n  padding-right: 12px;\n  word-wrap: break-word;\n}\n"
 
 /***/ }),
 
 /***/ "./src/app/components/upload/upload.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"auth.isAuth\" class=\"row\">\n    <file-drop\n      headertext=\"Drop files here\"\n      (onFileDrop)=\"dropped($event)\"\n      (onFileOver)=\"fileOver($event)\" (onFileLeave)=\"fileLeave($event)\">\n      <span>optional content (don't set headertext then)</span>\n    </file-drop>\n    <div class=\"upload-table\">\n      <table class=\"table\">\n        <thead>\n        <tr>\n          <th>Name</th>\n        </tr>\n        </thead>\n        <tbody class=\"upload-name-style\">\n        <tr *ngFor=\"let item of files; let i=index\">\n          <td><strong>{{ item.relativePath }}</strong></td>\n        </tr>\n        </tbody>\n      </table>\n    </div>\n</div>\n"
+module.exports = "<div *ngIf=\"auth.isAuth\" class=\"row\">\n\n  <div class=\"col col-xs-12 col-sm-12 col-md-12\">\n    <file-drop\n      headertext=\"Drop files here\" (onFileDrop)=\"dropped($event)\"\n      (onFileOver)=\"fileOver($event)\" (onFileLeave)=\"fileLeave($event)\"\n      headertext=\" \"\n      customstyle=\"uploader-container\">\n\n    </file-drop>\n    <p *ngIf=\"filesResults.length < 1\" class=\"roboto-bold\">Déposer des instruments</p>\n\n    <div class=\"files-container\">\n      <div *ngFor=\"let file of filesResults\" class=\"file-container\">\n        {{file.name}}\n      </div>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -693,6 +856,7 @@ var UploadComponent = /** @class */ (function () {
         this.store = store;
         this.http = http;
         this.files = [];
+        this.filesResults = [];
     }
     UploadComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -707,7 +871,7 @@ var UploadComponent = /** @class */ (function () {
         console.log("dropped");
         this.files = event.files;
         var _loop_1 = function (droppedFile) {
-            // Is it a file?
+            // Is it a file wave?
             if (droppedFile.fileEntry.isFile) {
                 var fileEntry = droppedFile.fileEntry;
                 fileEntry.file(function (file) {
@@ -720,9 +884,10 @@ var UploadComponent = /** @class */ (function () {
                     });
                     _this.http.post('http://localhost:3000/sound/upload', formData, { headers: headers })
                         .subscribe(function (data) {
-                        console.log(data);
+                        _this.filesResults.push({ name: file.name, sucess: true });
                     }, function (err) {
-                        console.log(err);
+                        _this.filesResults.push({ name: file.name, sucess: false });
+                        alert(err.error.error.message || err.msg);
                     });
                 });
             }
@@ -791,6 +956,16 @@ var ApiService = /** @class */ (function () {
         var urlLogin;
         urlLogin = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].app_url + '/account/auth';
         return this.http.post(urlLogin, data);
+    };
+    ApiService.prototype.logout = function (token) {
+        var urlLogin;
+        urlLogin = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].app_url + '/account/logout?token=' + token;
+        return this.http.get(urlLogin);
+    };
+    ApiService.prototype.getUserSound = function (token) {
+        var urlSounds;
+        urlSounds = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].app_url + '/sounds/user?token=' + token;
+        return this.http.get(urlSounds);
     };
     ApiService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),

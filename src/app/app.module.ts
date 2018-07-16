@@ -16,6 +16,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LeftSideBarComponent } from './components/sidebar/left/left.component';
 import { TopSideBarComponent } from './components/sidebar/top/top.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { SoundsComponent } from './components/sounds/sounds.component';
+import { SoundPlayerComponent } from './components/soundplayer/soundplayer.component';
 
 import { ApiService } from './services/api/api.service';
 
@@ -29,6 +31,8 @@ import { ApiService } from './services/api/api.service';
     RegisterComponent,
     EditComponent,
     UploadComponent,
+    SoundsComponent,
+    SoundPlayerComponent,
   ],
   imports: [
     BrowserModule,

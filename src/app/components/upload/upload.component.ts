@@ -4,6 +4,7 @@ import { FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop/src
 import {AppState, WebAuth} from "../../interfaces";
 import {Store} from "@ngrx/store";
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 import {ApiService} from "../../services/api/api.service";
 
@@ -16,6 +17,7 @@ import {ApiService} from "../../services/api/api.service";
 export class UploadComponent implements OnInit{
 
   public files: UploadFile[] = [];
+  public filesResults = [];
   auth : WebAuth;
 
   constructor(private apiService: ApiService,  private store: Store<AppState>, private http: HttpClient) {}
@@ -33,7 +35,7 @@ export class UploadComponent implements OnInit{
     this.files = event.files;
     for (const droppedFile of event.files) {
 
-      // Is it a file?
+      // Is it a file wave?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
@@ -49,9 +51,10 @@ export class UploadComponent implements OnInit{
           this.http.post('http://localhost:3000/sound/upload',
             formData, { headers: headers })
             .subscribe(data => {
-              console.log(data)
+              this.filesResults.push({name: file.name, sucess: true});
             },err=>{
-              console.log(err);
+              this.filesResults.push({name: file.name, sucess: false});
+              alert(err.error.error.message|| err.msg);
             })
         });
       } else {

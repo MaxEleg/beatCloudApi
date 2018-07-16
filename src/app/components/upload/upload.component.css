@@ -1,11 +1,12 @@
-.errors-container{
-  padding-bottom: 8px;
+.files-container{
+  width: 100%;
 }
 
-.error {
-  color: red;
-}
-
-.already-auth{
-  padding-top: 30px;
+.file-container{
+  width: 120px;
+  height: 184px;
+  border: 2px solid #484848;
+  display: inline-block;
+  padding-right: 12px;
+  word-wrap: break-word;
 }

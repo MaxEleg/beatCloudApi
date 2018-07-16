@@ -30,3 +30,30 @@ textarea:focus, input:focus{
   padding-left: var(--sidebar-size);
   padding-bottom: 57px;
 }
+
+/************** UPLOADER ******************/
+.uploader-container{
+  position: relative;
+  min-height: 212px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px dashed #CCC;
+  background-color: #FAFAFA;
+}
+
+#dropZone.uploader-container > .content {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 68px;
+}
+#dropZone.uploader-container > .content > p{
+  font-family: 'Roboto' , sans-serif;
+  font-size: 30px;
+  color: black;
+  opacity: 0.25;
+}
+/*******************************************/
