@@ -16,7 +16,7 @@ module.exports = function(app) {
       }
 
       req.user = await app.models.User.findById(token.userId);
-      req.token = tokenId;
+      req.token = await app.models.User.findById(tokenId);
       if(!req.user){
         res.status(400).json({msg: "Le propriétaire du token est introuvable" });
         return;
