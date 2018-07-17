@@ -2,8 +2,7 @@
   <div class="col-md-2"></div>
   <div class="col-md-8">
     <div class="py-5 text-center">
-      <h2>Créer un compte</h2>
-      <p class="lead">Créez vous un compte et passez votre première commande ! </p>
+      <h2>Editer mes informations</h2>
     </div>
 
     <div class="errors-container">
@@ -17,11 +16,11 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label for="firstName">Nom </label>
-          <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Dupont" value="" ngModel>
+          <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Dupont" value="" [(ngModel)]="auth.lastName">
         </div>
         <div class="col-md-6 mb-3">
           <label for="lastName">Prénom</label>
-          <input name="firstName" type="text" class="form-control" id="firstName" value="" placeholder="Jean" ngModel>
+          <input name="firstName" type="text" class="form-control" id="firstName" value="" placeholder="Jean"  [(ngModel)]="editMeal.price">
         </div>
       </div>
       <div class="mb-3">

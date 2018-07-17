@@ -4,16 +4,22 @@
     <file-drop
       headertext="Drop files here" (onFileDrop)="dropped($event)"
       (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)"
-      headertext=" "
+      headertext="Faite glisser vos instruments"
       customstyle="uploader-container">
-
     </file-drop>
-    <p *ngIf="filesResults.length < 1" class="roboto-bold">Déposer des instruments</p>
-
-    <div class="files-container">
-      <div *ngFor="let file of filesResults" class="file-container">
-        {{file.name}}
-      </div>
+    <div class="upload-table">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+        </thead>
+        <tbody class="upload-name-style">
+        <tr *ngFor="let file of filesResults; let i=index">
+          <td><strong>{{ file.name }}</strong></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

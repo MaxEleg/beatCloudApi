@@ -33,8 +33,8 @@ export class SoundPlayerComponent implements OnInit {
       this.wavesurfer = WaveSurfer.create({
         container: '#' + playerId,
         // The color can be either a simple CSS color or a Canvas gradient
-        waveColor: "#f50",
-        progressColor: 'hsla(200, 100%, 30%, 0.5)',
+        waveColor: "#D3D3D3",
+        progressColor: '#f50',
         cursorColor: '#f50',
         // This parameter makes the waveform look like SoundCloud's player
         barWidth: 3

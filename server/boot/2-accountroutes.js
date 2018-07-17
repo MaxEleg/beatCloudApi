@@ -1,3 +1,5 @@
+var logged = require("../../controllers/middlewares/logged");
+
 module.exports = function publicApi(app) {
   app.post('/account/register', async function(req, res) {
       try {
@@ -75,11 +77,18 @@ module.exports = function publicApi(app) {
     if (!token) {
       return res.status(401).json({msg: 'Aucun token fourni'});
     }
-    app.models.User.logout(token, function(err) {
+    app.models.User.logout(token, function (err) {
       if (err) return res.json({msg: 'Une erreur est survenue'});
       res.json({
         msg: 'Vous etes déconnecté',
       });
     });
   });
+
+  app.get('/account/reload', logged(app), async function(req, res) {
+    var token = await app.models.
+
+
+  });
+
 };
