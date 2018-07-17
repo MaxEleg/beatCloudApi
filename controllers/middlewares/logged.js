@@ -5,17 +5,25 @@ module.exports = function(app) {
     try{
       var AccessToken = app.models.AccessToken;
       var tokenId = req.query.token || req.body.token || req.headers.token;
+
       if (!tokenId) {
         res.status(400).json({msg: 'Token non fourni'});
         return;
       }
+
       var token = await AccessToken.findById(tokenId);
+
       if(!token){
         res.status(400).json({msg: 'Token inconnu'});
         return;
       }
 
-      req.user = await app.models.User.findById(token.userId);
+      var user = await app.models.User.findById(token.userId);
+      if(!user.banned){
+        res.status(400).json({msg: 'Vous avez été banni, la plateforme vous est innacessible'});
+        return;
+      }
+      req.user = user;
       req.token = await app.models.User.findById(tokenId);
       if(!req.user){
         res.status(400).json({msg: "Le propriétaire du token est introuvable" });
