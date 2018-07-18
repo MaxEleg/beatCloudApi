@@ -19,16 +19,16 @@ module.exports = function(app) {
       }
 
       var user = await app.models.User.findById(token.userId);
-      if(!user.banned){
+      if(!user){
+        res.status(400).json({msg: "Le propriétaire du token est introuvable" });
+        return;
+      }
+      if(user.banned){
         res.status(400).json({msg: 'Vous avez été banni, la plateforme vous est innacessible'});
         return;
       }
       req.user = user;
-      req.token = await app.models.User.findById(tokenId);
-      if(!req.user){
-        res.status(400).json({msg: "Le propriétaire du token est introuvable" });
-        return;
-      }
+      req.token = token;
       next();
     }catch(ex){
       console.log(ex);

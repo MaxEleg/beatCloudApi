@@ -4,7 +4,6 @@ import { FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop/src
 import {AppState, WebAuth} from "../../interfaces";
 import {Store} from "@ngrx/store";
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 
 import {ApiService} from "../../services/api/api.service";
 
@@ -39,17 +38,10 @@ export class UploadComponent implements OnInit{
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-
-          console.log(droppedFile.relativePath, file);
           const formData = new FormData();
           formData.append('file', file, droppedFile.relativePath);
 
-          // Headers
-          const headers = new HttpHeaders({
-            'token': this.auth.token
-          });
-          this.http.post('http://localhost:3000/sound/upload',
-            formData, { headers: headers })
+          this.apiService.sendForm(this.auth.token, formData)
             .subscribe(data => {
               this.filesResults.push({name: file.name, sucess: true});
             },err=>{

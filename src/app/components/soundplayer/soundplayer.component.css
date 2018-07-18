@@ -13,7 +13,7 @@
   width: 128px;
   top: 44px;
   left: 26px;
-  background-image: url(http://localhost:3000/icons/wave.svg);
+  background-image: url(http://localhost:8080/icons/wave.svg);
   background-size: 100% auto;
 }
 

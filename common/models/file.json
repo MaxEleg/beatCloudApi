@@ -1,5 +1,5 @@
 {
-  "name": "Sound",
+  "name": "File",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -17,6 +17,10 @@
     "type": {
       "type": "string",
       "required": true
+    },
+    "file": {
+      "type" : "object",
+      "required": false
     }
   },
   "validations": [],

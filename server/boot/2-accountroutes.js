@@ -112,14 +112,15 @@ module.exports = function publicApi(app) {
   app.post('/account/edit', logged(app), async function(req, res) {
     try {
       var user = req.user;
-
       user.firstName = req.body.firstName;
-      user.lastName = req.body.firstName;
+      user.lastName = req.body.lastName;
       user.artistName = req.body.artistName;
       user.phone = req.body.phone;
-      user.email = req.body.email;
       user = await user.save();
-      var token = await app.models.AccessToken.findOne({id: req.token.id});
+
+      await app.models.AccessToken.remove({id: req.token.id});
+      var token = await app.models.AccessToken.create({userId: req.user.id});
+
       res.json(_formatWebAuth(user, token));
     } catch (ex) {
       console.log(ex);

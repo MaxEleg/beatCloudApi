@@ -14,7 +14,16 @@ import * as AuthActions from '../../stores/auth/auth.actions';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-  errors: any[] = [];
+  user: User = {
+    username: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    artistName: "",
+    phone: ""
+  };
+
+
   auth: WebAuth;
 
   constructor(private apiService: ApiService,  private store: Store<AppState>) {}
@@ -25,26 +34,24 @@ export class EditComponent implements OnInit {
     }).subscribe((auth: WebAuth) => {
       this.auth = auth;
     });
+
+    var sub = this.apiService.sendRequest('/account/?token='+ this.auth.token, 'get');
+    sub.subscribe((user : User)=>{
+      this.user = user;
+    },function(err){
+      console.log(err);
+    });
   }
 
-  onSubmit(form) {
+  editAccount(form) {
     const newUser: User = form;
 
-    this.errors = [];
-    if (form.password !== form.confirmPassword) {
-      this.errors.push({msg : 'Le mot de passe de confirmation est inccorect.'});
-      return;
-    }
-    newUser.birthDate = new Date(form.birthYear, form.birthMonth - 1, form.birthDay).getTime();
-
-    this.apiService.createAccount(newUser).subscribe((result: WebAuth) => {
+    this.apiService.editAccount(this.auth.token, newUser).subscribe((result: WebAuth) => {
+      console.log(result);
       this.store.dispatch(new AuthActions.LoginIn(result));
-    }, result => {
-      if (Array.isArray(result.error)) {
-        this.errors = result.error;
-      } else {
-        this.errors = [result.error];
-      }
+    }, err => {
+      console.log(err);
+      alert("une erreur est survenue : " + err.error.msg);
     });
   }
 }

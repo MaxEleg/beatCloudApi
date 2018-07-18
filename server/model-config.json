@@ -35,7 +35,7 @@
     "dataSource": "mongodb",
     "public": false
   },
-  "Sound": {
+  "File": {
     "dataSource": "mongodb",
     "public": false
   }

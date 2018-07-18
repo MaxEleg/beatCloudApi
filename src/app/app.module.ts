@@ -4,7 +4,7 @@ import { HttpClientModule   } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { FileDropModule } from 'ngx-file-drop';
-
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { AuthReducer } from './stores/auth/auth.reducer';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,10 +42,13 @@ import { ApiService } from './services/api/api.service';
     StoreModule.forRoot({
       auth: AuthReducer
     }),
-    FileDropModule
+    FileDropModule,
+    SnotifyModule,
   ],
   providers: [
     ApiService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
   ],
   bootstrap: [RootComponent]
 })

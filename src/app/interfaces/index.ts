@@ -1,10 +1,3 @@
-export interface Meal {
-  _id: string;
-  name: string;
-  price: number;
-  description: string;
-}
-
 export interface WebAuth {
   firstName: string;
   lastName: string;
@@ -17,16 +10,15 @@ export interface WebAuth {
 }
 
 export interface AppState {
-  cart: Meal[];
   auth: WebAuth;
 }
 
 export interface User {
+  username: string;
+  email: string;
   firstName: string;
   lastName: string;
-  username: string;
-  mail: string;
+  artistName: string;
   phone: string;
-  password: string;
-  birthDate: any;
+  birthDate? :any;
 }
