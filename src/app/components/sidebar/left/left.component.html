@@ -1,7 +1,7 @@
 <div class="left-sidebar">
 
   <div class="button-container">
-    <div routerLink="/" class="left-button main-button">
+    <div routerLinkActive="active-button" routerLink="/home" class="left-button main-button">
       <i class="fab fa-soundcloud"></i>
     </div>
   </div>
@@ -11,26 +11,26 @@
     <div class="left-button" data-target="#modalLogin" data-toggle="modal" data-target="#modalLogin">
       <i class="fas fa-sign-in-alt"></i>
     </div>
-    <div routerLink="/register" class="left-button">
+    <div routerLinkActive="active-button" routerLink="/register" class="left-button">
       <i class="fas fa-user-plus"></i>
     </div>
   </div>
 
   <div *ngIf="auth.isAuth" class="button-container">
-    <div routerLink="/edit" class="left-button">
+    <div routerLinkActive="active-button" routerLink="/edit" class="left-button">
       <i class="fas fa-users-cog"></i>
     </div>
 
-    <div routerLink="/upload" class="left-button">
+    <div routerLinkActive="active-button" routerLink="/upload" class="left-button">
       <i class="fas fa-file-upload"></i>
     </div>
 
-    <div routerLink="/sounds" class="left-button">
+    <div routerLinkActive="active-button" routerLink="/sounds" class="left-button">
       <i class="fas fa-music"></i>
     </div>
 
     <div *ngIf="auth.rank >= 7" class="button-container">
-      <div class="left-button">
+      <div routerLinkActive="active-button" class="left-button">
         <i class="fas fa-tachometer-alt"></i>
       </div>
     </div>
@@ -41,7 +41,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <div style="z-index: 99999;" class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLoginLabel" aria-hidden="true">

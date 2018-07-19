@@ -19,7 +19,7 @@
       "required": true
     },
     "file": {
-      "type" : "object",
+      "type": "object",
       "required": false
     }
   },

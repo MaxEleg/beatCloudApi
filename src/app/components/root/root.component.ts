@@ -19,6 +19,7 @@ export class RootComponent implements OnInit {
     if (authItem && authItem.isAuth) {
 
       var sub = this.apiService.sendRequest('/account/?token='+ authItem.token, 'get');
+      this.store.dispatch(new AuthActions.LoginIn(authItem));
       sub.subscribe((user : WebAuth)=>{
         this.store.dispatch(new AuthActions.LoginIn(user));
       },(err) => {

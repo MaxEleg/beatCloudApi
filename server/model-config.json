@@ -38,5 +38,9 @@
   "File": {
     "dataSource": "mongodb",
     "public": false
+  },
+  "Music": {
+    "dataSource": "mongodb",
+    "public": false
   }
 }

@@ -30,6 +30,12 @@ export class SoundPlayerComponent implements OnInit {
     this.playerId = playerId;
 
     setTimeout(()=>{
+      var player = document.getElementById(playerId);
+
+      if(player){
+        player.innerHTML= "";
+      }
+
       this.wavesurfer = WaveSurfer.create({
         container: '#' + playerId,
         // The color can be either a simple CSS color or a Canvas gradient
@@ -48,6 +54,9 @@ export class SoundPlayerComponent implements OnInit {
   }
 
   playPause(){
+    if(!this.playerLoaded){
+      return;
+    }
     this.wavesurfer.playPause();
     this.isPlaying = !this.isPlaying;
   }

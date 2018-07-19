@@ -1,10 +1,55 @@
-<div class="row">
 
-  <div class="heading">
-    <h3>Mes instruments</h3>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li (ng-click)="loadSounds()" class="nav-item">
+    <a class="nav-link active" id="instu-tab" data-toggle="tab" href="#instru" role="tab" aria-controls="home" aria-selected="true">
+      Mes instruments
+    </a>
+  </li>
+  <li (ng-click)="loadMusics()" class="nav-item">
+    <a class="nav-link" id="music-tab" data-toggle="tab" href="#music" role="tab" aria-controls="profile" aria-selected="false">
+      Mes musiques
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="album-tab" data-toggle="tab" href="#album" role="tab" aria-controls="contact" aria-selected="false">
+      Mes albums
+    </a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="instru" role="tabpanel" aria-labelledby="home-tab">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12" *ngFor="let sound of sounds">
+        <app-soundplayer [sound]="sound"></app-soundplayer>
+      </div>
+      <div *ngIf="!sounds.length" class="col-xs-12 col-sm-12 col-md-12">
+        <div class="empty">
+          <p>Aucun instrument n'a été déposé</p>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="col-xs-12 col-sm-12 col-md-12" *ngFor="let sound of sounds">
-    <app-soundplayer [sound]="sound"></app-soundplayer>
+  <div class="tab-pane fade" id="music" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12" *ngFor="let music of musics">
+        <app-soundplayer [sound]="music"></app-soundplayer>
+      </div>
+      <div *ngIf="!musics.length" class="col-xs-12 col-sm-12 col-md-12">
+        <div class="empty">
+          <p>Aucune musique instrument n'a été déposé</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12" *ngFor="let album of albums">
+      </div>
+      <div *ngIf="!albums.length" class="col-xs-12 col-sm-12 col-md-12">
+        <div class="empty">
+          <p>Vous n'avez créé aucun album</p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

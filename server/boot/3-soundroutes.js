@@ -1,7 +1,6 @@
 'use strict';
 const loggedMiddleWare = require('../../controllers/middlewares/logged');
 const uploadersLib = require('../../controllers/lib/uploaders');
-const crypto = require('crypto');
 const fileSystem = require('fs');
 const path = require('path');
 
@@ -13,20 +12,12 @@ module.exports = function upload(app) {
   app.post('/sound/upload', uploaders.sound.single('file'), function(req, res) {
     res.json(req.file);
   });
-
-  app.post('/music/upload', uploaders.music.single('music'), function(req, res) {
-    res.json(req.file);
-  });
-
   app.get('/sounds/user', loggedMiddleWare(app), async function(req, res) {
     try {
       var sounds = await app.models.File.find({
         where: {type: 'sound', userId: req.user.id}
       });
-
-      var user = await app.models.User.findById(req.user.id);
-
-      sounds.map(sound=>sound.artistName = user.artistName);
+      sounds.map(sound=>sound.artistName = req.user.artistName);
 
       res.json(sounds);
     } catch (ex) {
@@ -35,9 +26,10 @@ module.exports = function upload(app) {
     }
   });
   app.post('/sound/edit/:id', loggedMiddleWare(app), async function(req, res) {
-    var sound = await app.models.File.findOne({where: {id: req.params.id, type: 'sound'}});
-    if (sound.userId !== req.user.id) {
-      res.status(400).json({msg: "Vous n'avez aucun droit sur cet instrument"});
+    var sound = await app.models.File.findOne({where: {id: req.params.id, type: 'sound', userId: req.user.id}});
+    if (!sound) {
+      res.status(400).json({msg: 'Instrument introuvable.'});
+      return;
     }
     sound.name = req.body.name;
     res.json({
@@ -52,13 +44,12 @@ module.exports = function upload(app) {
           uid: req.params.uid
         }
       });
-
       if (!sound) {
         res.status(400).json({msg: "Merci de verifier l'uid"});
         return;
       }
 
-      var filePath = path.join(__dirname, '../../uploads/sound/' + sound.id);
+      var filePath = path.join(__dirname, '../../uploads/' + sound.type + '/' + sound.uid);
       var stat = fileSystem.statSync(filePath);
 
       res.writeHead(200, {

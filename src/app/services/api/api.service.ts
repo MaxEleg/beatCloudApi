@@ -40,6 +40,11 @@ export class ApiService {
     urlSounds = environment.app_url + '/sounds/user?token=' + token;
     return this.http.get(urlSounds);
   }
+  getUserMusic(token) {
+    let urlMusic;
+    urlMusic = environment.app_url + '/music/user?token=' + token;
+    return this.http.get(urlMusic);
+  }
 
   sendRequest(url, method) {
     let urlSounds;
