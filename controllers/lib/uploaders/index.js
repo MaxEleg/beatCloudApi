@@ -6,6 +6,12 @@ function _isWaveFile(file) {
   return names[names.length - 1] === 'wav';
 }
 
+function _isImageFile(file) {
+  var names = file.split('.');
+  var images = ['jpg','gif','png']
+  return images.includes(names[names.length - 1]);
+}
+
 module.exports = function(app){
 
   var getUploader = function(type) {
@@ -46,6 +52,7 @@ module.exports = function(app){
 
 
   var uploaderMusic = getUploader('music');
+  var uploaderImage = getUploader('image');
   uploaderMusic.filename = async function (req, file, cb) {
     try {
 
@@ -53,26 +60,26 @@ module.exports = function(app){
         cb(new Error('Seul les fichiers wav sont supportés par la plateforme'));
         return;
       }
-      console.log(req.headers);
+      var sounds = JSON.parse(req.headers.sounds);
+
       var newMusic = new app.models.Music({
         name: req.headers.name,
-        userId: req.user.id,
-        soundsId: JSON.parse(req.headers.sounds)
+        soundsIds: sounds
       });
+
+      newMusic.userId = req.user.id;
 
       var newFile = new app.models.File({
         name: file.originalname,
         type: 'music',
         userId: req.user.id,
-        file: file
+        file: file,
       });
       newFile.uid = newFile.getUid(req.user, file.originalname);
-      newFile.userId = req.user.id;
-
 
       newFile = await newFile.save();
 
-      newMusic.fileId = newFile.id;
+      newMusic.soundId = newFile.id;
       await newMusic.save();
 
       cb(null, newFile.uid);
@@ -81,11 +88,32 @@ module.exports = function(app){
     }
   };
 
+  uploaderImage.filename = async function (req, file, cb) {
+    try {
+
+      if (!_isImageFile(file.originalname)) {
+        cb(new Error('Seul les fichiers images jpg, gif et png  sont supportés par la plateforme'));
+        return;
+      }
+
+      var newFile = new app.models.File({
+        name: file.originalname,
+        type: 'image',
+        userId: req.user.id,
+        file: file,
+      });
+      newFile.uid = newFile.getUid(req.user, file.originalname);
+      newFile = await newFile.save();
+      req.uid = newFile.uid;
+      cb(null, newFile.uid);
+    } catch (ex) {
+      cb(ex);
+    }
+  };
+
   var storageSound = multer.diskStorage(getUploader('sound'));
   var storageMusic = multer.diskStorage(uploaderMusic);
-  var storageImage = multer.diskStorage(getUploader('image'));
-
-
+  var storageImage = multer.diskStorage(uploaderImage);
 
   return{
     sound: multer({storage: storageSound}),

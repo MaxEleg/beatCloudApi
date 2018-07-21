@@ -45,6 +45,12 @@ export class ApiService {
     urlMusic = environment.app_url + '/music/user?token=' + token;
     return this.http.get(urlMusic);
   }
+  getPublicMusic() {
+    let urlMusic;
+    urlMusic = environment.app_url + '/public/musics/';
+    console.log(urlMusic);
+    return this.http.get(urlMusic);
+  }
 
   sendRequest(url, method) {
     let urlSounds;

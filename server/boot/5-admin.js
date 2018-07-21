@@ -11,7 +11,6 @@ module.exports = function upload(app) {
   });
   app.post('/admin/user/ban', async function(req, res) {
     var user = await app.models.User.findById(req.body.userId);
-    console.log(user);
     user.banned = !user.banned;
     user = await user.save();
     res.json(user);

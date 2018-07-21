@@ -26,12 +26,19 @@ export class SoundPlayerComponent implements OnInit {
 
   ngOnInit() {
     var playerId = 'player-' + this.sound.id;
-    var soundUrl = environment.app_url + '/sound/load/' + this.sound.uid;
+    var soundUrl = environment.app_url + '/public/content/' + this.sound.uid;
     this.playerId = playerId;
+    var sound = this.sound;
+    var playerImageUrl = environment.app_url + "/icons/wave.svg";
+
+    if(sound.imageUrl){
+      playerImageUrl = sound.imageUrl;
+    }
 
     setTimeout(()=>{
       var player = document.getElementById(playerId);
-
+      var playerImage = document.getElementById("img-" + playerId);
+      playerImage.setAttribute('style', "background-image: url(" + playerImageUrl + ");")
       if(player){
         player.innerHTML= "";
       }

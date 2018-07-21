@@ -1,8 +1,7 @@
 'use strict';
 const loggedMiddleWare = require('../../controllers/middlewares/logged');
 const uploadersLib = require('../../controllers/lib/uploaders');
-const fileSystem = require('fs');
-const path = require('path');
+
 
 module.exports = function upload(app) {
   const uploaders = uploadersLib(app);
@@ -37,32 +36,4 @@ module.exports = function upload(app) {
     });
   });
 
-  app.get('/sound/load/:uid', async function(req, res) {
-    try {
-      var sound = await app.models.File.findOne({
-        where: {
-          uid: req.params.uid
-        }
-      });
-      if (!sound) {
-        res.status(400).json({msg: "Merci de verifier l'uid"});
-        return;
-      }
-
-      var filePath = path.join(__dirname, '../../uploads/' + sound.type + '/' + sound.uid);
-      var stat = fileSystem.statSync(filePath);
-
-      res.writeHead(200, {
-        'Content-Type': 'audio/x-wav',
-        'Content-Length': stat.size
-      });
-
-      var readStream = fileSystem.createReadStream(filePath);
-      // We replaced all the event handlers with a simple call to readStream.pipe()
-      readStream.pipe(res);
-    } catch (ex) {
-      console.log(ex);
-      res.status(400).json({msg: 'Une erreur est survenue.'});
-    }
-  });
 };

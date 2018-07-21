@@ -1,5 +1,5 @@
 <div class="player-container">
-  <div class="player-image"></div>
+  <div attr.id="img-{{playerId}}" class="player-image"></div>
   <div class="player-btn" (click)="playPause()">
     <i *ngIf="!isPlaying" class="far fa-play-circle"></i>
     <i *ngIf="isPlaying"  class="fas fa-pause-circle"></i>

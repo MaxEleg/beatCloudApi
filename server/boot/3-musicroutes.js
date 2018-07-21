@@ -32,9 +32,10 @@ module.exports = function upload(app) {
       var musics = [];
 
       for (let music of musicsUser) {
-        var file = await app.models.File.findById(music.fileId);
+        var file = await app.models.File.findById(music.soundId);
         file.name = music.name;
         file.artistName = req.user.artistName;
+        file.imageUrl = music.imageUrl;
         musics.push(file);
       }
 

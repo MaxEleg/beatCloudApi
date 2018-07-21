@@ -9,21 +9,22 @@
     "name": {
       "type": "string",
       "required": true
+    },
+    "soundId": {
+      "type": "string",
+      "required": true
+    },
+    "soundsIds": {
+      "type": "array",
+      "required": false
+    },
+    "imageUrl": {
+      "type": "string",
+      "default": ""
     }
   },
   "validations": [],
-  "relations": {
-    "user": {
-      "type": "belongsTo",
-      "model": "User",
-      "foreignKey": ""
-    },
-    "file": {
-      "type": "hasMany",
-      "model": "File",
-      "foreignKey": ""
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

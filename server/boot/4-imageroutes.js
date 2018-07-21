@@ -10,6 +10,7 @@ module.exports = function upload(app) {
   app.post('/image/upload', loggedMiddleWare(app));
 
   app.post('/image/upload', uploaders.image.single('image'), function(req, res) {
+    req.file.uid = req.uid;
     res.json(req.file);
   });
 };

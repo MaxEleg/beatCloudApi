@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import {ApiService} from '../../services/api/api.service';
 import {User, AppState, WebAuth} from '../../interfaces';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -17,15 +18,21 @@ export class SoundsComponent implements OnInit {
   albums: any = [];
   auth: WebAuth;
 
-  constructor(private apiService: ApiService,  private store: Store<AppState>) {}
+  constructor(private apiService: ApiService,  private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
     this.store.select((state: AppState ) => {
       return state.auth;
     }).subscribe((auth: WebAuth) => {
       this.auth = auth;
-      this.loadSounds();
-      this.loadMusics();
+      setTimeout(()=>{
+        if(!this.auth.isAuth){
+          this.router.navigateByUrl('/home');
+          return;
+        }
+        this.loadSounds();
+        this.loadMusics();
+      });
     });
   }
 

@@ -6,6 +6,7 @@ import {ApiService} from '../../services/api/api.service';
 import {User, AppState, WebAuth} from '../../interfaces';
 
 import * as AuthActions from '../../stores/auth/auth.actions';
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -14,7 +15,7 @@ import * as AuthActions from '../../stores/auth/auth.actions';
   styleUrls: ['./homepage.component.css']
 })
 export class HomePageComponent implements OnInit {
-  errors: any[] = [];
+  musics: any[] = [];
   auth: WebAuth;
 
   constructor(private apiService: ApiService,  private store: Store<AppState>) {}
@@ -24,6 +25,24 @@ export class HomePageComponent implements OnInit {
       return state.auth;
     }).subscribe((auth: WebAuth) => {
       this.auth = auth;
+    });
+    this.loadMusics();
+  }
+
+  loadMusics(){
+    this.apiService.getPublicMusic().subscribe((results :any)=>{
+      results.map(music=>{
+
+        if(!music.imageUrl){
+          music.imageUrl = environment.app_url + "/icons/wave.svg";
+        }
+        return music;
+      });
+      this.musics = results;
+      console.log(results);
+    },err=>{
+      alert("Une erreur est survenue");
+      console.log(err);
     });
   }
 }

@@ -19,7 +19,7 @@ export class LeftSideBarComponent implements OnInit {
   auth: WebAuth;
   error: string = '';
 
-  constructor(private store: Store<AppState>, private apiService: ApiService,  private router: Router, ) {}
+  constructor(private store: Store<AppState>, private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
     this.store.select((state: AppState ) => {

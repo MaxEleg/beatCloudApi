@@ -20,6 +20,7 @@
   <div class="tab-pane fade show active" id="instru" role="tabpanel" aria-labelledby="home-tab">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12" *ngFor="let sound of sounds">
+        <div style="margin-top: 50px;"><button>Supprimer</button></div>
         <app-soundplayer [sound]="sound"></app-soundplayer>
       </div>
       <div *ngIf="!sounds.length" class="col-xs-12 col-sm-12 col-md-12">
