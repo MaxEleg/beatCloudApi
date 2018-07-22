@@ -4,6 +4,7 @@ module.exports = function(app) {
 
       if(req.user && req.user.rank>=7){
         next();
+        return;
       }
 
       res.status(400).json({ "msg": "Vous n'avez pas les droits d'accéder à cette ressource"});

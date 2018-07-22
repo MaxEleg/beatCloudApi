@@ -114,10 +114,12 @@ module.exports = function(app){
   var storageSound = multer.diskStorage(getUploader('sound'));
   var storageMusic = multer.diskStorage(uploaderMusic);
   var storageImage = multer.diskStorage(uploaderImage);
+  var storagePlugin = multer.diskStorage(getUploader('plugin'));
 
   return{
     sound: multer({storage: storageSound}),
     music: multer({storage: storageMusic}),
     image: multer({storage: storageImage}),
+    plugin: multer({storage: storagePlugin}),
   }
 };

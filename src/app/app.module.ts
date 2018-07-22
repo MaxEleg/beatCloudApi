@@ -19,6 +19,8 @@ import { TopSideBarComponent } from './components/sidebar/top/top.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { SoundsComponent } from './components/sounds/sounds.component';
 import { SoundPlayerComponent } from './components/soundplayer/soundplayer.component';
+import { MusicEditComponent } from './components/musicedit/musicedit.component';
+import {AdminComponent} from "./components/admin/admin.component";
 
 import { ApiService } from './services/api/api.service';
 
@@ -34,6 +36,8 @@ import { ApiService } from './services/api/api.service';
     UploadComponent,
     SoundsComponent,
     SoundPlayerComponent,
+    MusicEditComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

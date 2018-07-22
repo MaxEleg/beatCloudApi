@@ -1,8 +1,6 @@
 'use strict';
 const loggedMiddleWare = require('../../controllers/middlewares/logged');
 const uploadersLib = require('../../controllers/lib/uploaders');
-const fileSystem = require('fs');
-const path = require('path');
 
 module.exports = function upload(app) {
   const uploaders = uploadersLib(app);
@@ -13,15 +11,14 @@ module.exports = function upload(app) {
   });
 
   app.post('/music/edit/:id', loggedMiddleWare(app), async function(req, res) {
-    var sound = await app.models.File.findOne({where: {id: req.params.id, type: 'sound', userId: req.user.id}});
-    if (!sound) {
+    var music = await app.models.Music.findById(req.params.id);
+    if (!music) {
       res.status(400).json({msg: 'Musique introuvable.'});
       return;
     }
-    sound.name = req.body.name;
-    res.json({
-      sound: await sound.save()
-    });
+    music.name = req.body.name;
+    music.imageUrl = req.body.imageUrl;
+    res.json(await music.save());
   });
 
   app.get('/music/user', loggedMiddleWare(app), async function(req, res) {
@@ -33,16 +30,55 @@ module.exports = function upload(app) {
 
       for (let music of musicsUser) {
         var file = await app.models.File.findById(music.soundId);
-        file.name = music.name;
-        file.artistName = req.user.artistName;
-        file.imageUrl = music.imageUrl;
-        musics.push(file);
+        if (file) {
+          musics.push({
+            name: music.name,
+            artistName: req.user.artistName,
+            imageUrl: music.imageUrl,
+            id: music.id,
+            uid: file.uid,
+            type: 'music',
+            userId: req.user.id
+          });
+        }
       }
-
       res.json(musics);
     } catch (ex) {
       console.log(ex);
       res.json(ex);
+    }
+  });
+
+  app.get('/music/:id', async function(req, res) {
+    var music = await app.models.Music.findById(req.params.id);
+    if (!music) {
+      res.status(400).json({msg: 'Musique introuvable.'});
+      return;
+    }
+    res.json({
+      sound: music
+    });
+  });
+
+  app.post('/music/remove/:id', loggedMiddleWare(app), async function(req, res) {
+    try {
+      var music;
+      music = await app.models.Music.findById(req.params.id);
+      if (!music) {
+        res.status(400).json({msg: 'Element introuvable.'});
+      }
+      if (music.userId.toString() !== req.user.id.toString()) {
+        res.status(400).json({msg: 'Cet instrument ne vous appartient pas'});
+        return;
+      }
+      await app.models.File.removeById(music.soundId.toString());
+      await app.models.Music.removeById(music.id.toString());
+      res.json({
+        msg: 'Music supprimé'
+      });
+    } catch (ex) {
+      console.log(ex);
+      res.status(400).json(ex);
     }
   });
 };

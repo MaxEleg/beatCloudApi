@@ -50,4 +50,9 @@ module.exports = function publicRoutes(app) {
       res.status(400).json({msg: 'Une erreur est survenue.'});
     }
   });
+
+  app.get('/publics/plugins', async function(req, res) {
+    var plugins = await app.models.File.find({where: {type: 'plugin'}});
+    res.json(plugins);
+  });
 };

@@ -13,7 +13,7 @@
   width: 128px;
   top: 44px;
   left: 26px;
-  background-size: 100% 100%;
+  background-size: 100% auto;
 }
 
 .waveform-container{
@@ -36,16 +36,6 @@
   top: 34px;
   color: #D3D3D3;
   left: 250px;
-}
-
-.sound-actions{
-  position: absolute;
-  font-size: 21px;
-  padding: 5px;
-  border-radius: 50%;
-  color: #0782d0;
-  right: 0;
-  top: 0;
 }
 
 .sound-artist{

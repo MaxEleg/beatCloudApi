@@ -19,7 +19,20 @@ module.exports = function upload(app) {
   app.get('/admin/sounds', async function(req, res) {
     try {
       var sounds = await app.models.File.find({where: {type: 'sound'}});
-      res.json(sounds);
+      var results = sounds;
+
+      var musics = await app.models.Music.find({});
+      for (let music of musics) {
+        var file = await app.models.File.findById(music.soundId);
+        results.push({
+          name: music.name,
+          uid: file.uid,
+          type: 'music',
+          userId: music.userId,
+          file: file.file,
+        });
+      }
+      res.json(results);
     } catch (ex) {
       res.json(ex);
     }

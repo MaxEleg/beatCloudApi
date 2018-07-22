@@ -7,6 +7,8 @@ import { HomePageComponent } from './components/homepage/homepage.component';
 import { EditComponent } from './components/edit/edit.component';
 import { UploadComponent } from './components/upload/upload.component';
 import {SoundsComponent} from "./components/sounds/sounds.component";
+import {MusicEditComponent} from "./components/musicedit/musicedit.component";
+import {AdminComponent} from "./components/admin/admin.component";
 
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'upload', component: UploadComponent },
   { path: 'sounds', component: SoundsComponent },
+  { path: 'music/edit/:id', component: MusicEditComponent },
+  { path: 'admin', component: AdminComponent },
 ];
 
 @NgModule({

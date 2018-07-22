@@ -9,6 +9,7 @@ function _formatWebAuth(user, token, isAuth = true) {
     artistName: user.artistName,
     rank: user.rank,
     token: token.id,
+    userId: user.id,
     isAuth: isAuth
   };
 }

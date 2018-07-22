@@ -10,17 +10,11 @@
       Mes musiques
     </a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" id="album-tab" data-toggle="tab" href="#album" role="tab" aria-controls="contact" aria-selected="false">
-      Mes albums
-    </a>
-  </li>
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="instru" role="tabpanel" aria-labelledby="home-tab">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12" *ngFor="let sound of sounds">
-        <div style="margin-top: 50px;"><button>Supprimer</button></div>
         <app-soundplayer [sound]="sound"></app-soundplayer>
       </div>
       <div *ngIf="!sounds.length" class="col-xs-12 col-sm-12 col-md-12">
@@ -38,17 +32,6 @@
       <div *ngIf="!musics.length" class="col-xs-12 col-sm-12 col-md-12">
         <div class="empty">
           <p>Aucune musique instrument n'a été déposé</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="tab-pane fade" id="album" role="tabpanel" aria-labelledby="album">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12" *ngFor="let album of albums">
-      </div>
-      <div *ngIf="!albums.length" class="col-xs-12 col-sm-12 col-md-12">
-        <div class="empty">
-          <p>Vous n'avez créé aucun album</p>
         </div>
       </div>
     </div>

@@ -6,4 +6,5 @@ module.exports = {
     user: process.env.MONGODB_USER,
     password: process.env.MONGODB_PASSWORD,
   },
+  appUrl: process.env.APP_URL,
 };

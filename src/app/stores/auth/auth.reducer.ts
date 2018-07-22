@@ -12,6 +12,7 @@ const defaultState: WebAuth = {
   artistName: '',
   rank: 0,
   token: '',
+  userId: '',
   isAuth: false
 };
 
@@ -26,6 +27,7 @@ export function AuthReducer(state: WebAuth = defaultState, action: Action) {
         artistName: action.payload.artistName,
         rank: action.payload.rank,
         token: action.payload.token,
+        userId: action.payload.userId,
         isAuth: true
       };
       localStorage.setItem('authItem', JSON.stringify(newState));

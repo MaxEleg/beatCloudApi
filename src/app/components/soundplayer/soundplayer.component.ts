@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import {ApiService} from '../../services/api/api.service';
 import {User, AppState, WebAuth} from '../../interfaces';
 import {environment} from "../../../environments/environment";
+import {Router} from "@angular/router";
 
 declare var WaveSurfer:any;
 
@@ -16,13 +17,13 @@ declare var WaveSurfer:any;
 export class SoundPlayerComponent implements OnInit {
   playerId: string = "";
   wavesurfer: any = {};
-  auth: WebAuth;
+  public auth: WebAuth;
   isPlaying: boolean = false;
   playerLoaded: boolean = false;
 
   @Input() sound;
 
-  constructor(private apiService: ApiService,  private store: Store<AppState>) {}
+  constructor(private apiService: ApiService,  private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
     var playerId = 'player-' + this.sound.id;
@@ -34,11 +35,18 @@ export class SoundPlayerComponent implements OnInit {
     if(sound.imageUrl){
       playerImageUrl = sound.imageUrl;
     }
+    this.store.select((state: AppState ) => {
+      return state.auth;
+    }).subscribe((auth: WebAuth) => {
+      this.auth = auth;
+    });
 
     setTimeout(()=>{
       var player = document.getElementById(playerId);
       var playerImage = document.getElementById("img-" + playerId);
-      playerImage.setAttribute('style', "background-image: url(" + playerImageUrl + ");")
+      if(playerImage){
+        playerImage.setAttribute('style', "background-image: url(" + playerImageUrl + ");")
+      }
       if(player){
         player.innerHTML= "";
       }
@@ -68,4 +76,22 @@ export class SoundPlayerComponent implements OnInit {
     this.isPlaying = !this.isPlaying;
   }
 
+  removeSound(){
+    var sub = this.apiService.sendRequest('/'+ this.sound.type + '/remove/' + this.sound.id, "post", this.auth.token);
+    var playerId = this.playerId;
+    sub.subscribe(()=>{
+      alert("Instrument supprimé");
+      var containerPlayer = document.getElementById("container-" + playerId);
+      if(containerPlayer){
+        containerPlayer.remove();
+      }
+    },(err)=>{
+      console.log(err);
+      alert(err.msg || err.error.message);
+    })
+  }
+
+  editSound(){
+    this.router.navigate(['/music/edit/'+ this.sound.id]);
+  }
 }

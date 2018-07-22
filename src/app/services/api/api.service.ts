@@ -18,7 +18,6 @@ export class ApiService {
 
   editAccount(token, user: User) {
     let urlEdit;
-    console.log(user);
     urlEdit = environment.app_url + '/account/edit?token=' + token;
     return this.http.post(urlEdit, user);
   }
@@ -52,18 +51,30 @@ export class ApiService {
     return this.http.get(urlMusic);
   }
 
-  sendRequest(url, method) {
-    let urlSounds;
-    urlSounds = environment.app_url + url;
-    return this.http[method](urlSounds);
+  sendRequest(url, method, token = "") {
+    let urlFinal;
+    urlFinal = environment.app_url + url;
+    if(token && token.length){
+      if(url.includes('?')) {
+        urlFinal += "&"
+      }else if(!url.includes('&') && !url.includes('?')){
+        urlFinal += "?";
+      }
+
+      urlFinal+= "token=" + token;
+    }
+    return this.http[method](urlFinal);
   }
 
-  sendForm(token, formData) {
-    const headers = new HttpHeaders({
-      'token': token
-    });
-    return this.http.post(environment.app_url + '/sound/upload',
+  sendForm(formData, url, headersData) {
+    const headers = new HttpHeaders(headersData);
+    return this.http.post(url,
       formData, { headers: headers });
   }
 
+  sendPost(url, data) {
+    let urlLogin;
+    urlLogin = url;
+    return this.http.post(urlLogin, data);
+  }
 }

@@ -6,6 +6,7 @@ import {Store} from "@ngrx/store";
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {ApiService} from "../../services/api/api.service";
+import {environment} from "../../../environments/environment";
 
 
 @Component({
@@ -41,9 +42,10 @@ export class UploadComponent implements OnInit{
           const formData = new FormData();
           formData.append('file', file, droppedFile.relativePath);
 
-          this.apiService.sendForm(this.auth.token, formData)
+          this.apiService.sendForm(formData, environment.app_url + '/sound/upload', {token: this.auth.token})
             .subscribe(data => {
               this.filesResults.push({name: file.name, sucess: true});
+              alert("Le fichier " +  file.name + " a été ajouté ");
             },err=>{
               this.filesResults.push({name: file.name, sucess: false});
               alert(err.error.error.message|| err.msg);

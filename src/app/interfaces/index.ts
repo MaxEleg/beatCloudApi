@@ -7,6 +7,7 @@ export interface WebAuth {
   rank: number;
   token: string;
   isAuth: boolean;
+  userId: string;
 }
 
 export interface AppState {
