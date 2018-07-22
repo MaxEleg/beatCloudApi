@@ -8,6 +8,8 @@ import {ApiService} from '../../services/api/api.service';
 import {User, AppState, WebAuth} from '../../interfaces';
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
+import {FileSystemDirectoryEntry, FileSystemFileEntry} from "ngx-file-drop/src/lib/ngx-drop/dom.types";
+import {UploadEvent} from "ngx-file-drop";
 
 
 @Component({
@@ -50,12 +52,7 @@ export class AdminComponent implements OnInit {
     });
   }
   loadPlugins(){
-    this.apiService.sendRequest('/publics/plugins', 'get', this.auth.token).subscribe(results=>{
-      this.plugins$ = results;
-    },err=>{
-      alert("Une erreur est survenue");
-      console.log(err);
-    });
+    this.plugins$ = this.apiService.sendRequest('/public/plugins', 'get', this.auth.token);
   }
 
   banUser(user){
@@ -66,12 +63,46 @@ export class AdminComponent implements OnInit {
       this.loadUsers();
     },((err)=>console.log(err)));
   }
-  removeSound(user){
-    this.apiService.sendPost('/admin/user/ban', {
+
+
+  public dropped(event: UploadEvent) {
+    console.log("dropped");
+    for (const droppedFile of event.files) {
+
+      // Is it a file wave?
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          const formData = new FormData();
+          formData.append('plugin', file, droppedFile.relativePath);
+
+          this.apiService.sendForm(formData, environment.app_url + '/upload/plugin', {token: this.auth.token})
+            .subscribe(data => {
+              this.loadPlugins();
+            },err=>{
+              alert(err.error.error.message|| err.msg);
+            })
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
+  }
+
+  public fileOver(event){
+    console.log(event);
+  }
+
+  public fileLeave(event){
+    console.log(event);
+  }
+  public deletePlugin(plugin){
+    this.apiService.sendPost('/plugin/remove/'+ plugin.id, {
       token: this.auth.token,
-      userId: user.id,
     }).subscribe((result)=>{
-      this.loadUsers();
+      this.loadPlugins();
     },((err)=>console.log(err)));
   }
 }

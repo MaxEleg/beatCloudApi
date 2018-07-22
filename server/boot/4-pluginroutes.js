@@ -18,4 +18,8 @@ module.exports = function upload(app) {
     var plugins = await app.models.File.find({where: {type: 'plugin'}});
     res.json(plugins);
   });
+  app.post('/plugin/remove/:id', loggedMiddleWare(app), adminMiddleWare(app), async function(req, res) {
+    await app.models.File.removeById(req.params.id);
+    res.json(await app.models.File.find());
+  });
 };
