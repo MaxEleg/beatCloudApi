@@ -5,7 +5,7 @@ var path = require('path');
 module.exports = function(app) {
   // Install a `/` route that returns server status
   var dir = __dirname + '/../../uploads';
-  if (!path.existsSync(dir)) {
+  if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
   }
 
