@@ -45,7 +45,7 @@ module.exports = function upload(app) {
       if (!sound) {
         res.status(400).json({msg: 'Element introuvable.'});
       }
-      if (sound.userId.toString() !== req.user.id.toString()) {
+      if (sound.userId.toString() !== req.user.id.toString() && req.user.rank < 7) {
         res.status(400).json({msg: 'Cet instrument ne vous appartient pas'});
         return;
       }

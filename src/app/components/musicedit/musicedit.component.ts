@@ -57,7 +57,7 @@ export class MusicEditComponent implements OnInit {
 
   public editMusic(form){
     form.token = this.auth.token;
-    this.apiService.sendPost(environment.app_url + '/music/edit/' + this.music.id, form)
+    this.apiService.sendPost('/music/edit/' + this.music.id, form)
       .subscribe(res=>{
       this.music = res;
       alert("Modifié");

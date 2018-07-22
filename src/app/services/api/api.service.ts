@@ -75,6 +75,6 @@ export class ApiService {
   sendPost(url, data) {
     let urlLogin;
     urlLogin = url;
-    return this.http.post(urlLogin, data);
+    return this.http.post(environment.app_url + urlLogin, data);
   }
 }

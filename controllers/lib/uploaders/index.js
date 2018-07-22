@@ -1,14 +1,15 @@
 const multer = require('multer');
 const fs = require('fs');
 
-function _isWaveFile(file) {
+function _isSupportedFile(file) {
   var names = file.split('.');
-  return names[names.length - 1] === 'wav';
+  var extension = names[names.length - 1];
+  return  extension === 'wav' || extension === 'jar';
 }
 
 function _isImageFile(file) {
   var names = file.split('.');
-  var images = ['jpg','gif','png']
+  var images = ['jpg','gif','png'];
   return images.includes(names[names.length - 1]);
 }
 
@@ -36,12 +37,13 @@ module.exports = function(app){
           newFile.uid = newFile.getUid(req.user, file.originalname);
           newFile.userId = req.user.id;
 
-          if (!_isWaveFile(file.originalname)) {
+          if (!_isSupportedFile(file.originalname)) {
             cb(new Error('Seul les fichiers wav sont supportés par la plateforme'));
             return;
           }
 
           newFile = await newFile.save();
+          req.uid = newFile.uid;
           cb(null, newFile.uid);
         } catch (ex) {
           cb(ex);
@@ -56,7 +58,7 @@ module.exports = function(app){
   uploaderMusic.filename = async function (req, file, cb) {
     try {
 
-      if (!_isWaveFile(file.originalname)) {
+      if (!_isSupportedFile(file.originalname)) {
         cb(new Error('Seul les fichiers wav sont supportés par la plateforme'));
         return;
       }

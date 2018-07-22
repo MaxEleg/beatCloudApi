@@ -1,6 +1,7 @@
 'use strict';
 const fileSystem = require('fs');
 const path = require('path');
+const config = require('../../config');
 
 module.exports = function publicRoutes(app) {
   app.get('/public/musics', async function(req, res) {
@@ -36,11 +37,16 @@ module.exports = function publicRoutes(app) {
       if (mimeType === 'audio/wave') {
         mimeType = 'audio/x-wav';
       }
-
-      res.writeHead(200, {
+      var headers = {
         'Content-Type': mimeType,
         'Content-Length': stat.size
-      });
+      };
+
+      if (file.type === 'plugin') {
+        res.setHeader('Content-Disposition', 'attachment; filename="' + file.file.originalname + '"');
+      }
+
+      res.writeHead(200, headers);
 
       var readStream = fileSystem.createReadStream(filePath);
       // We replaced all the event handlers with a simple call to readStream.pipe()
@@ -51,8 +57,11 @@ module.exports = function publicRoutes(app) {
     }
   });
 
-  app.get('/publics/plugins', async function(req, res) {
+  app.get('/public/plugins', async function(req, res) {
     var plugins = await app.models.File.find({where: {type: 'plugin'}});
+    for (let plugin of plugins) {
+      plugin.downloadUrl = config.appUrl + '/public/content/' + plugin.uid;
+    }
     res.json(plugins);
   });
 };

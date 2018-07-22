@@ -16,6 +16,12 @@ module.exports = function upload(app) {
       res.status(400).json({msg: 'Musique introuvable.'});
       return;
     }
+
+    if (req.user.id.toString() !== music.userId.toString() && req.user.rank < 7) {
+      res.status(400).json({msg: "Vous n'avez aucun droit sur cette ressource"});
+      return;
+    }
+
     music.name = req.body.name;
     music.imageUrl = req.body.imageUrl;
     res.json(await music.save());
@@ -67,8 +73,8 @@ module.exports = function upload(app) {
       if (!music) {
         res.status(400).json({msg: 'Element introuvable.'});
       }
-      if (music.userId.toString() !== req.user.id.toString()) {
-        res.status(400).json({msg: 'Cet instrument ne vous appartient pas'});
+      if (music.userId.toString() !== req.user.id.toString() && req.user.rank < 7) {
+        res.status(400).json({msg: 'Cette musique ne vous appartient pas'});
         return;
       }
       await app.models.File.removeById(music.soundId.toString());

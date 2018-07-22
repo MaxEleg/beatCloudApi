@@ -13,7 +13,7 @@ module.exports = function upload(app) {
     var user = await app.models.User.findById(req.body.userId);
     user.banned = !user.banned;
     user = await user.save();
-    res.json(user);
+    res.json(await app.models.User.find());
   });
 
   app.get('/admin/sounds', async function(req, res) {
@@ -30,6 +30,7 @@ module.exports = function upload(app) {
           type: 'music',
           userId: music.userId,
           file: file.file,
+          id: music.id
         });
       }
       res.json(results);

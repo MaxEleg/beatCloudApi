@@ -8,7 +8,7 @@
     <div class="sound-artist">{{sound.artistName}}</div>
     <div class="sound-name">{{sound.name}}</div>
   </div>
-  <div *ngIf="this.auth.userId == sound.userId" class="sound-actions">
+  <div *ngIf="this.auth.userId == sound.userId || auth.rank >= 7 " class="sound-actions">
     <button *ngIf="sound.type == 'music'" type="button" (click)="editSound()" class="btn btn-secondary">
       <i class="fas fa-pencil-alt"></i>
     </button>
