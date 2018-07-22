@@ -8,7 +8,9 @@ module.exports = function publicRoutes(app) {
     try {
       var musics = await app.models.Music.find({});
       for (let music of musics) {
+        var file = await app.models.File.findById(music.soundId);
         music.artistName = (await app.models.User.findById(music.userId)).artistName;
+        music.uid = file.uid;
       }
 
       res.json(musics);
@@ -63,5 +65,27 @@ module.exports = function publicRoutes(app) {
       plugin.downloadUrl = config.appUrl + '/public/content/' + plugin.uid;
     }
     res.json(plugins);
+  });
+
+  app.get('/public/all', async function(req, res) {
+    try {
+      var term = req.query.term;
+
+      var musics = await app.models.Music.find({where: {name: {like: term}}});
+      for (let music of musics) {
+        var file = await app.models.File.findById(music.soundId);
+        music.artistName = (await app.models.User.findById(music.userId)).artistName;
+        music.uid = file.uid;
+      }
+
+      var files = await app.models.File.find({where: {
+        name: {like: term},
+        type: 'sound'
+      }});
+      musics = musics.concat(files);
+      res.json(musics);
+    } catch (ex) {
+      res.json(ex);
+    }
   });
 };

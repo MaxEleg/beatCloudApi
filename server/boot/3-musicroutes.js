@@ -57,6 +57,8 @@ module.exports = function upload(app) {
 
   app.get('/music/:id', async function(req, res) {
     var music = await app.models.Music.findById(req.params.id);
+    var file = await app.models.File.findById(music.soundId);
+    music.uid = file.uid;
     if (!music) {
       res.status(400).json({msg: 'Musique introuvable.'});
       return;

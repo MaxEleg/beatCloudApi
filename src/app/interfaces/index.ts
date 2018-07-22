@@ -12,6 +12,7 @@ export interface WebAuth {
 
 export interface AppState {
   auth: WebAuth;
+  search: string;
 }
 
 export interface User {

@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import {ApiService} from '../../../services/api/api.service';
 import {User, AppState, WebAuth} from '../../../interfaces/index';
 
-import * as AuthActions from '../../../stores/auth/auth.actions';
+import * as SearchActions from '../../../stores/search/search.actions';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -16,8 +17,9 @@ import * as AuthActions from '../../../stores/auth/auth.actions';
 export class TopSideBarComponent implements OnInit {
   errors: any[] = [];
   auth: WebAuth;
+  term: string = "";
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
     this.store.select((state: AppState ) => {
@@ -25,5 +27,15 @@ export class TopSideBarComponent implements OnInit {
     }).subscribe((auth: WebAuth) => {
       this.auth = auth;
     });
+
+    this.store.dispatch(new SearchActions.SetTerm(''));
+  }
+
+  search(){
+    this.router.navigate(['search']);
+  }
+
+  keyup(){
+    this.store.dispatch(new SearchActions.SetTerm(this.term));
   }
 }

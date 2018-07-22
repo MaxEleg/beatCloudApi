@@ -8,6 +8,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 
 import { AuthReducer } from './stores/auth/auth.reducer';
+import { SearchReducer } from './stores/search/search.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { RootComponent } from './components/root/root.component';
 import {  HomePageComponent } from './components/homepage/homepage.component';
@@ -21,8 +22,10 @@ import { SoundsComponent } from './components/sounds/sounds.component';
 import { SoundPlayerComponent } from './components/soundplayer/soundplayer.component';
 import { MusicEditComponent } from './components/musicedit/musicedit.component';
 import {AdminComponent} from "./components/admin/admin.component";
+import {MusicComponent} from "./components/music/music.component";
 
 import { ApiService } from './services/api/api.service';
+import {SearchComponent} from "./components/search/search.component";
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { ApiService } from './services/api/api.service';
     SoundsComponent,
     SoundPlayerComponent,
     MusicEditComponent,
-    AdminComponent
+    AdminComponent,
+    MusicComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,8 @@ import { ApiService } from './services/api/api.service';
     AppRoutingModule,
     FormsModule,
     StoreModule.forRoot({
-      auth: AuthReducer
+      auth: AuthReducer,
+      search: SearchReducer,
     }),
     FileDropModule,
     SnotifyModule,

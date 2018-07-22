@@ -4,7 +4,7 @@
     <div class="sidebar-search">
       <form>
         <i class="fas fa-search"></i>
-        <input class="search-input roboto-light" type="search" placeholder="Rechercher musiques, artistes..." aria-label="Search">
+        <input name="term" [(ngModel)]="term" (focus)="search()" (keyup)="keyup()" class="search-input roboto-light" type="search" placeholder="Rechercher une musique" aria-label="Search">
       </form>
     </div>
     <div class="sidebar-user-profile">

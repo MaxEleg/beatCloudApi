@@ -7,6 +7,7 @@ import {User, AppState, WebAuth} from '../../interfaces';
 
 import * as AuthActions from '../../stores/auth/auth.actions';
 import {environment} from "../../../environments/environment";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class HomePageComponent implements OnInit {
   musics: any[] = [];
   auth: WebAuth;
 
-  constructor(private apiService: ApiService,  private store: Store<AppState>) {}
+  constructor(private apiService: ApiService,  private store: Store<AppState>, private router: Router) {}
 
   ngOnInit() {
     this.store.select((state: AppState ) => {
@@ -32,7 +33,6 @@ export class HomePageComponent implements OnInit {
   loadMusics(){
     this.apiService.getPublicMusic().subscribe((results :any)=>{
       results.map(music=>{
-
         if(!music.imageUrl){
           music.imageUrl = environment.app_url + "/icons/wave.svg";
         }
@@ -44,5 +44,9 @@ export class HomePageComponent implements OnInit {
       alert("Une erreur est survenue");
       console.log(err);
     });
+  }
+
+  viewMusic(music){
+    this.router.navigate(['/music/'+ music.id + '/' + music.uid]);
   }
 }

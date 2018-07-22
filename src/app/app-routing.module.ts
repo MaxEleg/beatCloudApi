@@ -9,6 +9,8 @@ import { UploadComponent } from './components/upload/upload.component';
 import {SoundsComponent} from "./components/sounds/sounds.component";
 import {MusicEditComponent} from "./components/musicedit/musicedit.component";
 import {AdminComponent} from "./components/admin/admin.component";
+import {MusicComponent} from "./components/music/music.component";
+import {SearchComponent} from "./components/search/search.component";
 
 
 const routes: Routes = [
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'sounds', component: SoundsComponent },
   { path: 'music/edit/:id', component: MusicEditComponent },
+  { path: 'music/:id/:uid', component: MusicComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'search', component: SearchComponent },
 ];
 
 @NgModule({
