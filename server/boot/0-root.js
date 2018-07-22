@@ -1,7 +1,13 @@
 'use strict';
+var fs = require('fs');
+var path = require('path');
 
 module.exports = function(app) {
   // Install a `/` route that returns server status
+  var dir = __dirname + '/../../uploads';
+  if (!path.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
 
   app.use('/', function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
