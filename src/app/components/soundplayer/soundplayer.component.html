@@ -16,6 +16,13 @@
       <i class="fas fa-trash-alt"></i>
     </button>
   </div>
+  <div class="sound-actions download-container">
+    <a href="{{env.app_url}}/public/content/{{sound.uid}}" target="_blank">
+      <button type="button" class="btn btn-success">
+        <i class="fas fa-download"></i>
+      </button>
+    </a>
+  </div>
   <div class="waveform-container">
     <div attr.id="{{playerId}}"></div>
   </div>

@@ -47,6 +47,11 @@
   right: 0;
   top: 0;
 }
+.download-container{
+  right: 0;
+  top: initial;
+  bottom: 0;
+}
 
 .sound-artist{
   color: #999;

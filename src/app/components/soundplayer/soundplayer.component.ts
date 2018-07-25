@@ -20,7 +20,7 @@ export class SoundPlayerComponent implements OnInit {
   public auth: WebAuth;
   isPlaying: boolean = false;
   playerLoaded: boolean = false;
-
+  public env = environment;
   @Input() sound;
 
   constructor(private apiService: ApiService,  private store: Store<AppState>, private router: Router) {}
