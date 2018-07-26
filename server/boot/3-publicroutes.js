@@ -76,12 +76,17 @@ module.exports = function publicRoutes(app) {
         var file = await app.models.File.findById(music.soundId);
         music.artistName = (await app.models.User.findById(music.userId)).artistName;
         music.uid = file.uid;
+        music.type = 'music';
       }
 
       var files = await app.models.File.find({where: {
         name: {like: term},
         type: 'sound'
       }});
+
+      for (let file of files) {
+        file.type = 'sound';
+      }
       musics = musics.concat(files);
       res.json(musics);
     } catch (ex) {
